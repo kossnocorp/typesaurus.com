@@ -1,0 +1,18 @@
+---
+import clsx from "clsx";
+const { size = "medium" } = Astro.props;
+---
+
+<a
+  href="/"
+  class={clsx(
+    "flex space-x-3 items-center font-semibold text-gray-200",
+    size === "large" && "space-x-3 text-4xl",
+    size === "medium" && "space-x-2 text-xl"
+  )}
+  ><img
+    src="/logo.png"
+    class={clsx(size === "large" && "h-10", size === "medium" && "h-7")}
+  />
+  <span>Typesaurus</span></a
+>

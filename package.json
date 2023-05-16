@@ -1,0 +1,27 @@
+{
+  "name": "typesaurus.com",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "firemyna dev",
+    "start": "firemyna dev",
+    "build": "firemyna build",
+    "preview": "firemyna preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "clsx": "^1.2.1",
+    "firebase-admin": "^11.7.0",
+    "firebase-functions": "^4.3.1"
+  },
+  "devDependencies": {
+    "@astrojs/svelte": "^2.1.1",
+    "@astrojs/tailwind": "^3.1.2",
+    "@tailwindcss/typography": "^0.5.9",
+    "astro": "^2.3.4",
+    "firebase-tools": "^11.29.1",
+    "firemyna": "^0.35.0",
+    "svelte": "^3.58.0",
+    "tailwindcss": "^3.3.2"
+  }
+}

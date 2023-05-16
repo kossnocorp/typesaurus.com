@@ -1,0 +1,146 @@
+---
+import Logotype from "../components/Logotype.astro";
+import BaseLayout from "./Base.astro";
+import DocItem from "./DocItem.astro";
+import DocCategoryItem from "./DocCategoryItem.astro";
+import DocCategorySub from "./DocCategorySub.astro";
+
+const { title } = Astro.props;
+---
+
+<BaseLayout {title}>
+  <div class="w-64 flex-col fixed inset-y-0 bg-slate-800">
+    <div class="flex-1 space-y-4 pt-5 pb-5 h-full overflow-y-auto">
+      <div class="flex items-center flex-shrink-0 px-4"><Logotype /></div>
+
+      <nav class="flex-1 px-2 space-y-2" aria-label="Sidebar">
+        <div class="space-y-1">
+          <DocCategoryItem href="/docs" icon="fa-terminal">
+            Introduction
+          </DocCategoryItem>
+
+          <div class="space-y-1" id="sub-menu-1">
+            <DocItem href="/docs/intro/quickstart">Quickstart</DocItem>
+
+            <DocCategorySub>Overview</DocCategorySub>
+
+            <DocItem href="/docs/intro/schema">Defining schema</DocItem>
+            <DocItem href="/docs/intro/reading">Reading data</DocItem>
+            <DocItem href="/docs/intro/writing">Writing data</DocItem>
+            <DocItem href="/docs/intro/type-safety">Type-safety</DocItem>
+
+            <DocCategorySub>Further reading</DocCategorySub>
+
+            <DocItem href="/docs/intro/features">Features</DocItem>
+            <DocItem href="/docs/intro/architecture">Architecture</DocItem>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <DocCategoryItem href="/docs" icon="fa-terminal">
+            Advanced
+          </DocCategoryItem>
+
+          <div class="space-y-1" id="sub-menu-1">
+            <DocCategorySub>Guides</DocCategorySub>
+
+            <DocItem href="/docs/advanced/designing">Designing schema</DocItem>
+
+            <DocCategorySub>Extensions</DocCategorySub>
+
+            <DocItem href="/docs/advanced/transactions">Transactions</DocItem>
+            <DocItem href="/docs/advanced/groups">Collection groups</DocItem>
+            <DocItem href="/docs/advanced/batch">Batch writes</DocItem>
+
+            <DocCategorySub>Concepts</DocCategorySub>
+
+            <DocItem href="/docs/advanced/variable">Variable model</DocItem>
+            <DocItem href="/docs/advanced/serverdates">Server dates</DocItem>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <DocCategoryItem href="/docs" icon="fa-terminal">
+            Integrations
+          </DocCategoryItem>
+
+          <div class="space-y-1" id="sub-menu-1">
+            <DocItem href="/docs/integrations/react">React</DocItem>
+            <DocItem href="/docs/integrations/next">Next.js</DocItem>
+            <DocItem href="/docs/integrations/preact">Preact</DocItem>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <DocCategoryItem href="/docs/api" icon="fa-terminal">
+            API
+          </DocCategoryItem>
+
+          <div class="space-y-1" id="sub-menu-1">
+            <DocCategorySub>Defining schema</DocCategorySub>
+
+            <DocItem href="/docs/api/schema" code>schema</DocItem>
+
+            <DocCategorySub>Reading data</DocCategorySub>
+
+            <DocItem href="/docs/api/get" code>get</DocItem>
+            <DocItem href="/docs/api/all" code>all</DocItem>
+            <DocItem href="/docs/api/query" code>query</DocItem>
+            <DocItem href="/docs/api/many" code>many</DocItem>
+
+            <DocCategorySub>Writing data</DocCategorySub>
+
+            <DocItem href="/docs/api/add" code>add</DocItem>
+            <DocItem href="/docs/api/set" code>set</DocItem>
+            <DocItem href="/docs/api/update" code>update</DocItem>
+            <DocItem href="/docs/api/upset" code>upset</DocItem>
+            <DocItem href="/docs/api/remove" code>remove</DocItem>
+
+            <DocCategorySub>Advanced</DocCategorySub>
+
+            <DocItem href="/docs/api/transaction" code>transaction</DocItem>
+            <DocItem href="/docs/api/groups" code>groups</DocItem>
+            <DocItem href="/docs/api/batch" code>batch</DocItem>
+            <DocItem href="/docs/api/narrow" code>narrow</DocItem>
+
+            <DocCategorySub>Constructors</DocCategorySub>
+
+            <DocItem href="/docs/api/id" code>id</DocItem>
+            <DocItem href="/docs/api/ref" code>ref</DocItem>
+            <DocItem href="/docs/api/doc" code>doc</DocItem>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <DocCategoryItem href="/docs/types" icon="fa-terminal">
+            Classes
+          </DocCategoryItem>
+
+          <div class="space-y-1" id="sub-menu-1">
+            <DocItem href="/docs/classes/collection" code>Collection</DocItem>
+            <DocItem href="/docs/classes/ref" code>Ref</DocItem>
+            <DocItem href="/docs/classes/doc" code>Doc</DocItem>
+          </div>
+        </div>
+
+        <div class="space-y-1">
+          <DocCategoryItem href="/docs/types" icon="fa-terminal">
+            Types
+          </DocCategoryItem>
+
+          <div class="space-y-1" id="sub-menu-1">
+            <DocItem href="/docs/types/schema" code>Schema</DocItem>
+            <DocItem href="/docs/types/def" code>Def</DocItem>
+            <DocItem href="/docs/types/id" code>Id</DocItem>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <main class="pl-64">
+    <div class="p-10 prose prose-invert prose-xl max-w-4xl">
+      <slot />
+    </div>
+  </main>
+</BaseLayout>
