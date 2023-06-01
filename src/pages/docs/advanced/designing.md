@@ -99,8 +99,8 @@ For example once a post is scheduled, we want to increment the `scheduled` field
 
 ```ts
 db.organizations.update(orgId, ($) =>
-  $.field('counters, 'scheduled').set($.increment(1))
-)
+  $.field("counters", "scheduled").set($.increment(1))
+);
 ```
 
 Sounds easy enough, right?
