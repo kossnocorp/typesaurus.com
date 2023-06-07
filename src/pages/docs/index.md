@@ -6,8 +6,6 @@ layout: "../../layouts/Docs.astro"
 
 Typesaurus is the TypeScript-first ODM for Firestore.
 
-It works
-
 **Why?**
 
 - Designed with TypeScript's type inference in mind
@@ -24,8 +22,8 @@ It works
 - **Universal package**: reuse the same code on client and server.
 - **JavaScript-native**: converts Firestore data types, i.e. timestamp, to native JS types, i.e. `Date`.
 - **Build size-efficiency**: optimized build-size for web.
-- **Advanced type-safety**: uncompromised type-safety, includes Firestore quircks.
-- **Typed ids**: all document ids are types, so you'll never mixup an user id with an account id.
+- **Advanced type-safety**: uncompromised type-safety, includes Firestore quirks.
+- **Typed ids**: all document ids are types, so you'll never mix up a user id with an account id.
 - **Centralized schema**: easy to define, read and update.
 - **Single-import principle**: single import to define, single import to use.
 

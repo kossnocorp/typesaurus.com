@@ -50,7 +50,7 @@ interface UserProps {
 
 ## Subcollections
 
-To define a subcollectio, use `sub` method on the helper `$`:
+To define a subcollection, use `sub` method on the helper `$`:
 
 ```ts
 import { schema } from "typesaurus";
