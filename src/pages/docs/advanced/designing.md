@@ -33,11 +33,9 @@ We defined the credentials collection in the example with `Typesaurus.Id<'accoun
 
 [Learn more about shared ids](/docs/guides/type-safety#shared-ids).
 
-{% callout title="Don't abuse shared ids!" %}
-If two related documents have the same permissions and you need to download them together, they should be one document.
-
-It might be tempting to separate user profiles and settings, but in most cases, it will be beneficial for the end user to keep them as a single document as they both needed to display an app. Also, it's twice as less reads that you pay for
-{% /callout %}
+> #### Don't abuse shared ids!
+> If two related documents have the same permissions and you need to download them together, they should be one document.
+> It might be tempting to separate user profiles and settings, but in most cases, it will be beneficial for the end user to keep them as a single document as they both needed to display an app. Also, it's twice as less reads that you pay for
 
 ---
 
@@ -146,11 +144,9 @@ interface Organization {
 
 It will make the data harder to consume as we'll need to add additional checks before using the counters, but it will make updating it way easier. It's a balancing act.
 
-{% callout title="Consider this!" %}
-When designing a schema, always think about how you will update it.
-
-If you want to be able to update a single field, make sure that setting it won't cause data inconsistency.
-{% /callout %}
+> #### Consider this!
+> When designing a schema, always think about how you will update it.
+> If you want to be able to update a single field, make sure that setting it won't cause data inconsistency.
 
 If you **must** have the fields required, then make sure you always set them together, e.g.:
 
