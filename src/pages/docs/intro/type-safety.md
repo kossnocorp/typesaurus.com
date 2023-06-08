@@ -176,7 +176,8 @@ interface Organization {
 }
 
 await firestore.organization.update(organizationId, ($) => [
-  $.field("address", "street").set("Main street"), // Error
+  $.field("address", "street").set("Main street"),
+  //      ^^^^^^^^^ address can be undefined
 ]);
 ```
 
