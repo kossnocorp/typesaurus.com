@@ -98,7 +98,8 @@ db.users
     //=> [{ data: { name: "Sasha" }, ... }, { data: { name: "Sasha" }, ... }]
   })
   .catch((error) => {
-    // Error, i.e. no permission
+    error;
+    //=> Error, i.e. no permission
   });
 
 // Many
