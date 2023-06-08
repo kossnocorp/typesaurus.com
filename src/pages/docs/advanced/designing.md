@@ -147,6 +147,7 @@ It will make the data harder to consume as we'll need to add additional checks b
 
 > #### Consider this!
 > When designing a schema, always think about how you will update it.
+>
 > If you want to be able to update a single field, make sure that setting it won't cause data inconsistency.
 
 If you **must** have the fields required, then make sure you always set them together, e.g.:
