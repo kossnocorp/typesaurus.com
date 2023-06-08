@@ -148,7 +148,7 @@ interface Organization {
 
 ```ts
 await db.organizations.add(($) => ({
-  name: "Sashakorp",
+  name: "Typesaurus",
   createdAt: $.serverDate(),
 }));
 ```
