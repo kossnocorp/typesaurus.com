@@ -95,11 +95,11 @@ db.users
   .query(($) => $.field("name").equal("Sasha"))
   .on((users) => {
     users;
-    // [{ data: { name: "Sasha" }, ... }, { data: { name: "Sasha" }, ... }]
+    //=> [{ data: { name: "Sasha" }, ... }, { data: { name: "Sasha" }, ... }]
   })
   .catch((error) => {
     error;
-    // Error, i.e. no permission
+    //=> Error, i.e. no permission
   });
 
 // Many

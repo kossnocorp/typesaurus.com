@@ -6,9 +6,8 @@ description: Id type reference
 
 # `Id`
 
-{% callout type="warning" title="You might want to use inferred type instead!" %}
-Unless you use the type when defining the database, [consider using inferred id types](/docs/guides/type-safety#schema-types). It's a more idiomatic and less verbose way to define the ids.
-{% /callout %}
+> #### You might want to use inferred type instead!
+> Unless you use the type when defining the database, [consider using inferred id types](/docs/guides/type-safety#schema-types). It's a more idiomatic and less verbose way to define the ids.
 
 The `Id` type allows to define typed id string:
 
