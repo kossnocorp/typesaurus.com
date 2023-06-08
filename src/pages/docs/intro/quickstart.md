@@ -94,7 +94,8 @@ await db.users.query(($) => $.field("name").equal("Sasha"));
 db.users
   .query(($) => $.field("name").equal("Sasha"))
   .on((users) => {
-    // [{ data: { name: "Sasha" }, ... }, { data: { name: "Sasha" }, ... }]
+    users;
+    //=> [{ data: { name: "Sasha" }, ... }, { data: { name: "Sasha" }, ... }]
   })
   .catch((error) => {
     // Error, i.e. no permission
