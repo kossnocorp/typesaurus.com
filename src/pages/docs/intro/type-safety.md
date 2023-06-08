@@ -144,8 +144,6 @@ interface Organization {
   createdAt: Typesaurus.ServerDate;
 }
 
-```
-
 ...and when creating a doc
 
 ```ts
