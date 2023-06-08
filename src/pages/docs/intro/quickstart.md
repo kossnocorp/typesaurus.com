@@ -75,8 +75,10 @@ const user = await db.users.get(userId);
 
 // Might be null
 if (user) {
-  user.data.name; // "Sasha"
-  user.ref.id;    // "ykodM19iSxnI9CG0nq3g"
+  user.data.name;
+  //=> "Sasha"
+  user.ref.id;
+  //=> "ykodM19iSxnI9CG0nq3g"
 }
 
 // From subcollection
