@@ -20,6 +20,7 @@ const newCommentId = await db.comments.id();
 
 > #### Why id is async? 
 > You might have noticed that when generating an id, the method returns a promise.
+>
 > Like any other method that depends on the Firebase SDKs, it returns a promise so that the Web SDK package can be loaded asynchronously, save a few kilobytes, and reduce time to [LCP](https://web.dev/lcp/).
 
 [Learn more about subcollections](/docs/guides/type-safety#subcollections).
