@@ -24,19 +24,94 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Guides",
+          label: "Get started",
           items: [
-            // Each item here is one entry in the navigation menu.
             {
-              label: "Example Guide",
-              link: "/guides/example/",
+              label: "Quickstart",
+              link: "/get-started",
+              badge: "TODO",
+            },
+            {
+              label: "Basics",
+              autogenerate: {
+                directory: "get-started/basics",
+              },
+            },
+            {
+              label: "Further reading",
+              autogenerate: {
+                directory: "get-started/further-reading",
+              },
             },
           ],
         },
         {
-          label: "Reference",
+          label: "Advanced",
+          items: [
+            {
+              label: "Core",
+              autogenerate: {
+                directory: "advanced/core",
+              },
+            },
+            {
+              label: "Extensions",
+              autogenerate: {
+                directory: "advanced/extensions",
+              },
+            },
+          ],
+        },
+        {
+          label: "Integrations",
           autogenerate: {
-            directory: "reference",
+            directory: "integrations",
+          },
+        },
+        {
+          label: "API",
+          items: [
+            {
+              label: "schema",
+              link: "/api/schema",
+              badge: "TODO",
+            },
+            {
+              label: "Reading data",
+              autogenerate: {
+                directory: "api/reading",
+              },
+            },
+            {
+              label: "Writing data",
+              autogenerate: {
+                directory: "api/writing",
+              },
+            },
+            {
+              label: "Extensions",
+              autogenerate: {
+                directory: "api/extensions",
+              },
+            },
+            {
+              label: "Constructors",
+              autogenerate: {
+                directory: "api/constructors",
+              },
+            },
+          ],
+        },
+        {
+          label: "Classes",
+          autogenerate: {
+            directory: "classes",
+          },
+        },
+        {
+          label: "Types",
+          autogenerate: {
+            directory: "types",
           },
         },
       ],
