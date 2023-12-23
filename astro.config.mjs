@@ -29,7 +29,6 @@ export default defineConfig({
             {
               label: "Quickstart",
               link: "/get-started",
-              badge: "TODO",
             },
             {
               label: "Basics",

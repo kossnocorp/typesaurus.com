@@ -1,12 +1,13 @@
 ---
 title: Quickstart
+description: Get started with Typesaurus
 ---
 
 Follow this guide to quickly start with Typesaurus in your project.
 
 ## Installation
 
-To install Typesaurus, install [`typesaurus`], [`firebase`] and [`firebase-admin`]:
+To start, install [`typesaurus`], [`firebase`] and [`firebase-admin`]:
 
 ```bash
 npm install --save typesaurus firebase firebase-admin
@@ -20,12 +21,13 @@ Note that Typesaurus requires the [`firebase`] package to work in the web enviro
 
 ### Defining schema
 
-To define the database schema, import `schema` from [`typesaurus`]:
+To define the database schema, import [`schema`] from [`typesaurus`]:
 
 ```ts
 import { schema } from "typesaurus";
 
-// The database object, i.e.:
+// Generate the db object from given schem that you can use to access
+// Firestore, i.e.:
 //   await db.get(userId)
 export const db = schema(($) => ({
   users: $.collection<User>().sub({
@@ -35,9 +37,11 @@ export const db = schema(($) => ({
   books: $.collection<Book>(),
 }));
 
-// The database schema type, i.e.:
-//   function getUser(id: Schema["users"]["Id"]): Schema["users"]["Doc"]
+// Infer schema type helper with shortcuts to types in your database:
+//   function getUser(id: Schema["users"]["Id"]): Schema["users"]["Result"]
 export type Schema = Typesaurus.Schema<typeof db>;
+
+// Your model types:
 
 interface User {
   name: string;
@@ -57,11 +61,11 @@ interface Book {
 }
 ```
 
-[Read more about defining schema](/docs/intro/schema)
+→ [Read more about defining schema](/get-started/basics/schema/)
 
 ### Using the db
 
-After defining the schema, use the returned object to use the database:
+After defining the schema, use the returned object to work with the database:
 
 #### Reading data
 
@@ -70,29 +74,32 @@ Quick overview of available reading operations:
 ```ts
 import { db } from "./db";
 
-// Single
+// Get a single document:
 const user = await db.users.get(userId);
 
-// Might be null
+// The document might be null:
 if (user) {
   user.data.name;
   //=> "Sasha"
   user.ref.id;
   //=> "ykodM19iSxnI9CG0nq3g"
+
+  // Get the latest document state:
+  await user.get();
 }
 
-// From subcollection
+// Read from a subcollection:
 await db.users(userId).notes.get(noteId);
 
-// All
+// Get all documents in a collection
 await db.users.all();
 
-// Query
-await db.users.query(($) => $.field("name").equal("Sasha"));
+// Query a collection:
+await db.users.query(($) => $.field("name").eq("Sasha"));
 
-// Subscription
+// Use real-time subscriptions:
 db.users
-  .query(($) => $.field("name").equal("Sasha"))
+  .query(($) => $.field("name").eq("Sasha"))
   .on((users) => {
     users;
     //=> [{ data: { name: "Sasha" }, ... }, { data: { name: "Sasha" }, ... }]
@@ -102,11 +109,11 @@ db.users
     //=> Error, i.e. no permission
   });
 
-// Many
+// Get many documents by ids:
 await db.users.many([userAId, userBId]);
 ```
 
-[Read more about reading data](/docs/intro/reading)
+→ [Read more about reading data](/get-started/basics/reading/)
 
 #### Writing data
 
@@ -115,34 +122,31 @@ Quick overview of available writing operations:
 ```ts
 import { db } from "./db";
 
-// Add
+// Add a document:
 const ref = await db.users.add({ name: "Alexander" });
 
-// Set to id
+// Set document using an id:
 await db.users.set(userId, { name: "Sasha" });
 
-// Use via ref
+// References, just like documents provide operation methods:
 await ref.set({ name: "Sasha" });
 
-// In subcollection
+// Add to a subcollection:
 await db.users(ref.id).notes.add({ text: "Hello" });
 
-// Update
+// Update a document:
 await ref.update({ name: "Sasha" });
 
-// Update if exists or set
+// Set or update a document:
 await db.users.upset(userId, { name: "Sasha" });
 
-// Remove
+// Remove a document:
 await ref.remove();
 ```
 
-[Read more about writing data](/docs/intro/writing)
-
----
-
-[Defining schema →](/docs/intro/schema)
+→ [Read more about writing data](/get-started/basics/writing/)
 
 [`typesaurus`]: https://www.npmjs.com/package/typesaurus
 [`firebase-admin`]: https://www.npmjs.com/package/firebase-admin
 [`firebase`]: https://www.npmjs.com/package/firebase
+[`schema`]: /api/schema
