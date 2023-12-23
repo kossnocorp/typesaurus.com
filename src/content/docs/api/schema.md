@@ -31,7 +31,7 @@ interface Books {
 
 What you return from the function, defines the database structure.
 
-## `$`
+## `$` helper
 
 `$` is the helpers object that exposes the `schema` API.
 
@@ -56,6 +56,10 @@ interface Account {
 ```
 
 [You can customize the path, see `collection.name`](#collectionname)
+
+#### `$.collection(...).sub`
+
+#### `$.collection(...).name`
 
 #### `$.collection` generics
 

@@ -2,14 +2,11 @@
 title: Defining schema
 sidebar:
   order: 1
-  badge: TODO
 ---
-
-# Defining schema
 
 ## `schema`
 
-You define schema importing [`schema`](/docs/api/schema) from [`typesaurus`]:
+You define database structure by importing [`schema`](/api/schema) from [`typesaurus`] and describing each collection using [`$` helper](#helper):
 
 ```ts
 import { schema } from "typesaurus";
@@ -23,11 +20,11 @@ interface User {
 }
 ```
 
-[Read more about `schema`](/docs/api/schema).
+→ [Read more about `schema`](/api/schema)
 
 ## `Typesaurus.Schema`
 
-You'll find handy to use `Typesaurus.Schema` type to expose your database types:
+You'll find handy to use `Typesaurus.Schema` type to expose your defined schema types:
 
 ```ts
 import { schema, Typesaurus } from "typesaurus";
@@ -45,11 +42,9 @@ function addUser(user: Schema["users"]["Model"]): Schema["users"]["Result"];
 interface UserProps {
   user: Schema["users"]["Doc"];
 }
-
-// ...
 ```
 
-[Read more about `Typesaurus.Schema`](/docs/types/schema)
+→ [Read more about `Typesaurus.Schema`](/types/schema/)
 
 ## Subcollections
 
@@ -59,7 +54,7 @@ To define a subcollection, use `sub` method on the helper `$`:
 import { schema } from "typesaurus";
 
 const db = schema(($) => ({
-  // Nest notes into users
+  // Nest notes into users:
   users: $.collection<User>().sub({
     notes: $.collection<Note>(),
   }),
@@ -74,11 +69,21 @@ interface Note {
 }
 ```
 
+→ [Read more about defining subcollections](/api/schema#collectionsub)
+
+---
+
 To access a subcollection:
 
 ```ts
+// Add a note:
 await db.users(userId).notes.add({ text: "Hello" });
+
+// Create a typed id (you don't need to know userId for that):
+const id = await db.users.sub.notes.id();
 ```
+
+→ [Read more about accessing subcollections](/classes/collection/#sub)
 
 ## Renaming collection
 
@@ -100,10 +105,8 @@ To your app, you'll use the alias subscriptions:
 await db.subscriptions.add({ accountId });
 ```
 
-[Read more about `name`](/docs/api/schema#collectionname).
+→ [Read more about renaming collections](/api/schema#collectionname).
 
 ---
-
-[Reading data →](/docs/intro/reading)
 
 [`typesaurus`]: https://www.npmjs.com/package/typesaurus
