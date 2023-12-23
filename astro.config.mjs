@@ -5,12 +5,22 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://typesaurus.com",
   integrations: [
     starlight({
-      title: "My Docs",
-      customCss: ["./src/global.css"],
+      title: "Typesaurus",
+      logo: {
+        src: "./src/assets/logo.png",
+      },
+      customCss: [
+        // Tailwind globals
+        "./src/global.css",
+        // Fonts
+        "@fontsource-variable/inter",
+        "@fontsource-variable/martian-mono",
+      ],
       social: {
-        github: "https://github.com/withastro/starlight",
+        github: "https://github.com/kossnocorp/typesaurus",
       },
       sidebar: [
         {
@@ -30,6 +40,9 @@ export default defineConfig({
           },
         },
       ],
+      editLink: {
+        baseUrl: "https://github.com/kossnocorp/typesaurus.com/edit/main/",
+      },
     }),
     tailwind({
       applyBaseStyles: false,
