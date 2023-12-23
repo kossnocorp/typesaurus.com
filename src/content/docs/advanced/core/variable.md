@@ -1,7 +1,7 @@
 ---
 title: Variable models
 sidebar:
-  order: 3
+  order: 4
   badge: TODO
 ---
 

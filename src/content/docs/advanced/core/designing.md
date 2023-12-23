@@ -2,7 +2,7 @@
 title: Designing schema
 description: Desinging Firestore database schema with Typesaurus
 sidebar:
-  order: 1
+  order: 2
   badge: TODO
 ---
 

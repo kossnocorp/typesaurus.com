@@ -1,7 +1,7 @@
 ---
 title: Server dates
 sidebar:
-  order: 2
+  order: 3
   badge: TODO
 ---
 
