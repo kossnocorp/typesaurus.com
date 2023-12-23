@@ -1,32 +1,32 @@
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+import { defineConfig } from "astro/config";
+import starlight from "@astrojs/starlight";
 
-import tailwind from '@astrojs/tailwind';
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'My Docs',
-      customCss: ['./src/global.css'],
+      title: "My Docs",
+      customCss: ["./src/global.css"],
       social: {
-        github: 'https://github.com/withastro/starlight',
+        github: "https://github.com/withastro/starlight",
       },
       sidebar: [
         {
-          label: 'Guides',
+          label: "Guides",
           items: [
             // Each item here is one entry in the navigation menu.
             {
-              label: 'Example Guide',
-              link: '/guides/example/',
+              label: "Example Guide",
+              link: "/guides/example/",
             },
           ],
         },
         {
-          label: 'Reference',
+          label: "Reference",
           autogenerate: {
-            directory: 'reference',
+            directory: "reference",
           },
         },
       ],
