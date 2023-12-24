@@ -6,10 +6,10 @@ sidebar:
 
 Several methods allow reading documents:
 
-- [`get`](#get) - get a single document by id
-- [`all`](#all) - get all documents in a collection
-- [`query`](#query) - query documents by fields
-- [`many`](#many) - get documents by their ids
+- [`get`](#get) - gets a single document by id
+- [`all`](#all) - gets all documents in a collection
+- [`query`](#query) - queries documents by fields
+- [`many`](#many) - gets documents by their ids
 
 ## `get`
 
@@ -21,6 +21,17 @@ const user = await db.users.get(userId);
 // user is null when not found
 user?.data.name;
 //=> "Sasha"
+```
+
+`get` is also available on [`Ref`](/classes/ref/) and [`Doc`](/classes/doc/):
+
+```ts
+const user = await db.users.get(userId);
+
+// Later:
+if (user) {
+  const freshUser = await user.get();
+}
 ```
 
 → [Read more about `get`](/api/reading/get/)
