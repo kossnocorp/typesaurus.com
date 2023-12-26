@@ -1,7 +1,7 @@
 ---
 title: Schema
 sidebar:
-  order: 1
+  order: 4
   badge: TODO
 ---
 

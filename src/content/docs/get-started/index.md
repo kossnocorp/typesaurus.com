@@ -1,9 +1,15 @@
 ---
 title: Quickstart
 description: Get started with Typesaurus
+sidebar:
+  order: 0
 ---
 
 Follow this guide to quickly start with Typesaurus in your project.
+
+:::caution[Before you start!]
+I highly recommend reading the whole **Getting started** section. However, if you're eager to jump right into the code, consider at least finishing [Type safety](/get-started/type-safety/) as it covers the essential concepts, will help you avoid common pitfalls, and fix the most common type errors.
+:::
 
 ## Installation
 
@@ -16,6 +22,22 @@ npm install --save typesaurus firebase firebase-admin
 :::note
 Note that Typesaurus requires the [`firebase`] package to work in the web environment and [`firebase-admin`] to work in Node.js. These packages aren't listed as dependencies, so they won't install automatically with the Typesaurus package.
 :::
+
+## Configuration
+
+Use recommended TypeScript config to make the most of Typesaurus:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  }
+}
+```
+
+→ [Read more recommended config](/get-started/type-safety/#recommended-config)
 
 ## Using
 
@@ -61,7 +83,7 @@ interface Book {
 }
 ```
 
-→ [Read more about defining schema](/get-started/basics/schema/)
+→ [Read more about defining schema](/get-started/schema/)
 
 ### Using the db
 
@@ -113,7 +135,7 @@ db.users
 await db.users.many([userAId, userBId]);
 ```
 
-→ [Read more about reading data](/get-started/basics/reading/)
+→ [Read more about reading data](/get-started/reading/)
 
 #### Writing data
 
@@ -144,7 +166,7 @@ await db.users.upset(userId, { name: "Sasha" });
 await ref.remove();
 ```
 
-→ [Read more about writing data](/get-started/basics/writing/)
+→ [Read more about writing data](/get-started/writing/)
 
 [`typesaurus`]: https://www.npmjs.com/package/typesaurus
 [`firebase-admin`]: https://www.npmjs.com/package/firebase-admin

@@ -35,9 +35,9 @@ Read more about it down below.
 
 ### [`exactOptionalPropertyTypes`]
 
-One recommended option [`exactOptionalPropertyTypes`] is not well known, especially to TypeScript beginners, because it's not included in [`strict`]. However, it's crucial and will cause runtime errors where you don't expect them.
+One recommended option [`exactOptionalPropertyTypes`] is not well known, especially to TypeScript beginners, because [`strict`] does not include it. However, it's crucial and will cause runtime errors where you don't expect them.
 
-This option makes such a code invalid:
+This option makes such a code invalid and shows a type error:
 
 ```ts
 interface User {
@@ -49,14 +49,9 @@ const user: User = {
   firstName: "Sasha",
   lastName: undefined,
 };
-```
-
-It will show you a type error:
-
-```
-Type '{ firstName: string; lastName: undefined; }' is not assignable to type 'User' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
-  Types of property 'lastName' are incompatible.
-    Type 'undefined' is not assignable to type 'string'.(2375)
+//=> Type '{ firstName: string; lastName: undefined; }' is not assignable to type 'User' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+//=>    Types of property 'lastName' are incompatible.
+//=>      Type 'undefined' is not assignable to type 'string'.(2375)
 ```
 
 With this option, to allow setting undefined to an optional field, you have to specify it explicitly:
@@ -81,14 +76,84 @@ updateUser({ firstName: undefined });
 The code above would be valid without the option, but it would set the user into an impossible state and ultimately cause runtime errors.
 
 :::tip[Bite the bullet!]
-While inconvenient at first, the [`exactOptionalPropertyTypes`] option is worth the effort and will teach you write better TypeScript. So bite the bullet and enable it!
+While inconvenient at first, the [`exactOptionalPropertyTypes`] option is worth the effort and will teach you to write better TypeScript. So bite the bullet and enable it!
 :::
 
-## Schema types
+## `undefined` & `null`
+
+Just like in JSON, there's no `undefined` in Firestore. If you try to set `undefined`, both [Web SDK](https://firebase.google.com/docs/reference/js/firestore_.firestoresettings.md#firestoresettingsignoreundefinedproperties) and [Firebase Admin](https://firebase.google.com/docs/reference/node/firebase.firestore.Settings#optional-ignoreundefinedproperties) will throw an error unless you set an option to ignore `undefined`.
+
+However, avoiding undefined types is not always possible when working with existing types or types coming from 3rd-party. That's why when you set `undefined` with Typesaurus, it turns into `null`:
+
+```ts
+await db.users.set(userId, { lastName: undefined });
+
+const user = await db.users.get(userId);
+user.lastName;
+//=> null
+```
+
+That also enables you to set `null` to a field that can be `undefined`:
+
+```ts
+interface User {
+  firstName: string;
+  lastName?: string | undefined;
+}
+
+await db.users.set(userId, { lastName: null });
+```
+
+Typesaurus transforms all types and unions `null` with `undefined` both in write arguments and return values.
+
+However, when consuming data from the database, the functions or components that expect original types might start showing errors:
+
+```ts
+interface User {
+  firstName: string;
+  lastName?: string | undefined;
+}
+
+function renderUser(user: User) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+renderUser(userFromDB);
+//=> Type 'null' is not assignable to type 'string | undefined'.(2322)
+```
+
+To fix this, you can use the `Nullify` helper type:
+
+```ts
+import type { Nullify } from "typesaurus";
+
+function renderUser(user: Nullify<User>) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+renderUser(userFromDB);
+//=> OK
+```
+
+Or, when possible, add or use `null` instead of `undefined`:
+
+```ts
+interface User {
+  firstName: string;
+  // Fine
+  lastName?: string | undefined | null;
+}
+
+interface User {
+  firstName: string;
+  // Better!
+  lastName?: string | null;
+}
+```
 
 ---
 
-## `undefined` & `null`
+## Schema types
 
 ---
 
@@ -119,7 +184,7 @@ Mixing types or trying to use a `string` will cause TypeScript to complain about
 
 ```ts
 db.users.update(accountId, { name: "Sasha" });
-// Argument of type 'Id<"accounts">' is not assignable to parameter of type 'Id<"users">'.
+//=> Argument of type 'Id<"accounts">' is not assignable to parameter of type 'Id<"users">'.
 ```
 
 ### Creating id

@@ -25,24 +25,15 @@ export default defineConfig({
       sidebar: [
         {
           label: "Get started",
-          items: [
-            {
-              label: "Quickstart",
-              link: "/get-started",
-            },
-            {
-              label: "Basics",
-              autogenerate: {
-                directory: "get-started/basics",
-              },
-            },
-            {
-              label: "Further reading",
-              autogenerate: {
-                directory: "get-started/further-reading",
-              },
-            },
-          ],
+          autogenerate: {
+            directory: "get-started",
+          },
+        },
+        {
+          label: "About",
+          autogenerate: {
+            directory: "about",
+          },
         },
         {
           label: "Advanced",
