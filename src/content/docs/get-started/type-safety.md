@@ -5,8 +5,6 @@ sidebar:
   badge: TODO
 ---
 
-# Type safety
-
 ## Recommended config
 
 While Typesaurus will work with any TypeScript config, it's recommended to use the following:
@@ -135,6 +133,8 @@ renderUser(userFromDB);
 //=> OK
 ```
 
+→ [Read more about `Nullify`](/types/nullify/)
+
 Or, when possible, add or use `null` instead of `undefined`:
 
 ```ts
@@ -150,16 +150,6 @@ interface User {
   lastName?: string | null;
 }
 ```
-
----
-
-## Schema types
-
----
-
-## Subcollections
-
----
 
 ## Typed ids
 
@@ -326,3 +316,5 @@ In this example one could update the street, thus leaving the organization witho
 
 [`strict`]: https://www.typescriptlang.org/tsconfig#strict
 [`exactOptionalPropertyTypes`]: https://www.typescriptlang.org/tsconfig#exactOptionalPropertyTypes
+
+## Collection groups

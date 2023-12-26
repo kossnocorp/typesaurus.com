@@ -77,7 +77,7 @@ users[0]?.data.name;
 
 ## Realtime
 
-You can subscribe to updates calling `.on` on any of the reading methods:
+You can subscribe to updates by calling `.on` on any of the reading methods:
 
 ```ts
 db.users
@@ -86,6 +86,17 @@ db.users
     users[0]?.data.name;
     //=> "Alexander"
   });
+```
+
+The `on` function returns `off`, the function that you can call to unsubscribe:
+
+```ts
+const off = db.users
+  .query(($) => $.field("name").eq("Alexander"))
+  .on(processUsers);
+
+// Later:
+off();
 ```
 
 → [Read more about realtime](/advanced/core/realtime/)
