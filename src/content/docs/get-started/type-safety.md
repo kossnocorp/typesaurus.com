@@ -318,3 +318,21 @@ In this example one could update the street, thus leaving the organization witho
 [`exactOptionalPropertyTypes`]: https://www.typescriptlang.org/tsconfig#exactOptionalPropertyTypes
 
 ## Collection groups
+
+## Arrays
+
+There are several limitations on how you can use arrays with Firestore. To prevent runtime errors, Typesaurus incorporates those limitations into its type system.
+
+### Write helpers
+
+You can't use the write helpers (i.e., `$.remove()`) with server dates. Such a code will result in a type error:
+
+```ts
+
+```
+
+### Server dates in arrays
+
+As `$.` You can't [server dates](#serverdates)
+
+### Arrays in arrays
