@@ -48,9 +48,9 @@ renderUser(userFromDB);
 To fix this, you can use the `Nullify` helper type:
 
 ```ts
-import type { Nullify } from "typesaurus";
+import type { Typesaurus } from "typesaurus";
 
-function renderUser(user: Nullify<User>) {
+function renderUser(user: Typesaurus.Nullify<User>) {
   return `${user.firstName} ${user.lastName}`;
 }
 

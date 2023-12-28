@@ -35,6 +35,10 @@ const userRef = await db.users.set({ name: "Sasha" });
 await userRef.update({ name: "Alexander" });
 ```
 
+## Write helpers
+
+### `$.serverDate`
+
 ---
 
 See other writing methods:

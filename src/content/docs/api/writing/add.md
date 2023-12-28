@@ -5,8 +5,6 @@ sidebar:
   badge: TODO
 ---
 
-# `add`
-
 To add a document with random id to a collection, use `add` method on [`Collection`](/docs/classes/collection).
 
 ```ts
@@ -28,6 +26,10 @@ The method returns [Ref](/docs/classes/ref) instance:
 const userRef = await db.users.add({ name: "Sasha" });
 await userRef.update({ name: "Alexander" });
 ```
+
+## Write helpers
+
+### `$.serverDate`
 
 ---
 

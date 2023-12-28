@@ -39,16 +39,17 @@ const userRef = await db.users.update({ name: "Sasha" });
 await userRef.update({ name: "Alexander" });
 ```
 
+## Write helpers
+
+### `$.serverDate`
+
+- `$.serverDate` - set current server date to the field. [Read more about server dates](https://firebase.google.com/docs/firestore/manage-data/add-data#server_timestamp).
+
 ## Updating path
 
 When updating nested fields, or
 
 > It's is crucial that the path can be safety updated without causing data incosistency
-
-## Helpers list
-
-- `$.serverDate` - set current server date to the field. [Read more about server dates](https://firebase.google.com/docs/firestore/manage-data/add-data#server_timestamp).
--
 
 ## Builder mode
 
