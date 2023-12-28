@@ -199,3 +199,7 @@ db.organizations.update(orgId, ($) =>
   }
 }
 ```
+
+## Using arrays
+
+Array as JS lists
