@@ -26,7 +26,7 @@ interface User {
 
 → [Read more about `schema`](/api/schema)
 
-## `Typesaurus.Schema`
+## Inferring schema
 
 You'll find it handy to use `Typesaurus.Schema` type to expose your defined schema types:
 
@@ -48,7 +48,7 @@ interface UserProps {
 }
 ```
 
-→ [Read more about `Typesaurus.Schema`](/types/schema/)
+→ [Read more about inferring schema](/type-safety/inferring-schema/)
 
 ## Subcollections
 
@@ -109,7 +109,7 @@ To your app, you'll use the alias subscriptions:
 await db.subscriptions.add({ accountId });
 ```
 
-→ [Read more about renaming collections](/api/schema#collectionname).
+→ [Read more about renaming collections](/api/schema#collectionname)
 
 ---
 

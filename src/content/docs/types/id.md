@@ -13,12 +13,12 @@ sidebar:
 The `Id` type allows to define typed id string:
 
 ```ts
-import { schema, Typesaurus } from 'typesaurus'
+import { schema, Typesaurus } from "typesaurus";
 
-const db = schema(($) => {
+const db = schema(($) => ({
   organizations: $.collection<Organization>(),
-  subscriptions: $.collection<Subscription, Typesaurus.Id<'organizations'>>()
-})
+  subscriptions: $.collection<Subscription, Typesaurus.Id<"organizations">>(),
+}));
 ```
 
 [Learn more about typed ids](/docs/guides/type-safety#typed-ids).

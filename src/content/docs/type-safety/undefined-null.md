@@ -1,7 +1,7 @@
 ---
 title: undefined & null
 sidebar:
-  order: 1
+  order: 7
 ---
 
 Just like in JSON, there's no `undefined` in Firestore. If you try to set `undefined`, both [Web SDK](https://firebase.google.com/docs/reference/js/firestore_.firestoresettings.md#firestoresettingsignoreundefinedproperties) and [Firebase Admin](https://firebase.google.com/docs/reference/node/firebase.firestore.Settings#optional-ignoreundefinedproperties) will throw an error unless you set an option to ignore `undefined`.

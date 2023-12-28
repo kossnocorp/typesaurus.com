@@ -2,22 +2,21 @@
 title: Typed ids
 sidebar:
   order: 3
-  badge: TODO
 ---
 
-Often databases have similarly sounding entities, e.g., user and account. To prevent developers from mixing those and introducing stealthy bugs, Typesaurus makes all ids typed.
+Often, databases have similarly sounding entities, e.g., user and account. To prevent developers from mixing those and introducing stealthy bugs, Typesaurus makes all ids typed.
 
 By default, a collection id is linked to its path.
 
 ```ts
-import { schema } from 'typesaurus'
+import { schema } from "typesaurus";
 
-const db = schema(($) => {
+const db = schema(($) => ({
   users: $.collection<User>(),
   accounts: $.collection<Account>().sub({
-    reports: $.collection<Report>()
-  })
-})
+    reports: $.collection<Report>(),
+  }),
+}));
 ```
 
 In the given example, the user document id is `Id<"users">`, and the account's reports subcollection document id is `Id<"users/reports">`.
@@ -29,7 +28,7 @@ db.users.update(accountId, { name: "Sasha" });
 //=> Argument of type 'Id<"accounts">' is not assignable to parameter of type 'Id<"users">'.
 ```
 
-### Creating id
+## Creating id
 
 If you need to convert a string to an id or create a new random id, you can use a collection method `id`:
 
@@ -41,16 +40,31 @@ const userId = db.users.id("sasha");
 const newUserId = await db.users.id();
 ```
 
-→ [Read more about the `id` method](/api/constructors/id/).
+→ [Read more about the `id` method](/api/constructors/id/)
 
-### Id type
+---
 
-If you need to use an id type in a function or a type, you can utilize the inferred schema type:
-
-<!-- ```ts
-You can access any document id type, using the inferred schema types ([read more about schema types](#schema-types)): -->
+To access a subcollection id, use the `sub` property:
 
 ```ts
+const id = await db.users.sub.notes.id();
+```
+
+→ [Read more about accessing subcollections](/classes/collection/#sub)
+
+## Id type
+
+If you need to use an id type in a function or another type, you can utilize the inferred schema type:
+
+```ts
+import { schema, Typesaurus } from "typesaurus";
+
+export const db = schema(($) => ({
+  // ...
+}));
+
+export type Schema = Typesaurus.Schema<typeof db>;
+
 function removeAccount(accountId: Schema["accounts"]["Id"]) {
   return db.accounts.remove(accountId);
 }
@@ -63,30 +77,22 @@ function publishReport(
 }
 ```
 
-Essentially `Id` is an opaque `string` with the path mixed to it so that TypeScript can distinguish those. However, the type system will complain if you try to use it as a string, so you'll need to cast it using `.toString` first:
+→ [Read more about inferring schema](/type-safety/inferring-schema/)
+
+## Shared ids
+
+If your collections share ids, i.e., you use the organization id to store subscription documents, you can define a custom id using [`Typesaurus.Id`](/types/id/):
 
 ```ts
-function logId(id: string) {
-  console.log(`The id is ${id}`);
-}
+import { schema, Typesaurus } from "typesaurus";
 
-logId(accountId.toString());
-```
-
-### Shared ids
-
-If your collections share ids, i.e. you use the organization id to store subscription document, you can define custom id and make collections share id with help of [`Typesaurus.Id`](/docs/api/type/id):
-
-```ts
-import { schema, Typesaurus } from 'typesaurus'
-
-const db = schema(($) => {
+const db = schema(($) => ({
   organizations: $.collection<Organization>(),
-  subscriptions: $.collection<Subscription, Typesaurus.Id<'organizations'>>()
-})
+  subscriptions: $.collection<Subscription, Typesaurus.Id<"organizations">>(),
+}));
 ```
 
-Now, you'll be able to use the organization id to operate on subscription document:
+Now, you'll be able to use the organization id to operate on the subscription documents:
 
 ```ts
 function removeOrganization(organizationId: Schema["organizations"]["Id"]) {
@@ -97,23 +103,28 @@ function removeOrganization(organizationId: Schema["organizations"]["Id"]) {
 }
 ```
 
-- [Read more about `Id` type](/docs/api/type/id).
-- [When to use shared ids](/docs/guides/designing-schema#sharing-ids).
+→ [Read more about the `Id` type](/types/id)
 
-### Static ids
+→ [When to use shared ids](/type-safety/designing/#sharing-ids)
+
+:::caution[Using inferred schema]
+While it's possible to use [inferred schema](/type-safety/inferring-schema/) to access organization id `Schema["organizations"]["Id]` elsewhere else, including the schema models, you can't use it to define the schema collections as it will cause a circular type.
+:::
+
+## Static ids
 
 Some collections have a finite number of documents, i.e., global application stats. For those cases, you can define custom string ids:
 
 ```ts
 import { schema } from "typesaurus";
 
-const db = schema(($) => {
+const db = schema(($) => ({
   regionStats: $.collection<RegionStats, "us" | "europe" | "asia">();
-});
+}));
 
 db.regionStats.update("us", ($) => {
   online: $.increment(1);
 });
 ```
 
-[When to use static ids](/docs/guides/designing-schema#single-document-collection).
+→ [When to use static ids](/type-safety/designing/#single-document-collections)
