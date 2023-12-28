@@ -8,6 +8,8 @@ sidebar:
 
 In this guide, you'll learn the designing schema best practices. I will teach you how to write easy-to-maintain types that consider Firestore specifics. {% .lead %}
 
+## `null` over `undefined`
+
 ## Interfaces over aliases
 
 ## Various shapes

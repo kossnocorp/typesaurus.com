@@ -1,5 +1,5 @@
 ---
-title: ServerDate
+title: NormalizeServerDates
 sidebar:
   badge: TODO
 ---
