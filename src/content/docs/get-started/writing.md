@@ -4,9 +4,11 @@ sidebar:
   order: 3
 ---
 
-Several methods allow writing documents:
+In this document, you'll learn how to write data to your database with Typesaurus.
 
-- [`add`](#add) - adds a document with random id
+There are several methods that allow writing documents:
+
+- [`add`](#add) - adds a document with a random id
 - [`set`](#set) - sets specific document
 - [`update`](#update) - updates specific document
 - [`upset`](#upset) - updates or sets specific document

@@ -4,7 +4,9 @@ sidebar:
   order: 2
 ---
 
-Several methods allow reading documents:
+In this document, you'll learn how to read data from your database with Typesaurus.
+
+There are several methods that allow reading documents:
 
 - [`get`](#get) - gets a single document by id
 - [`all`](#all) - gets all documents in a collection
@@ -47,6 +49,8 @@ users[0]?.data.name;
 //=> "Sasha"
 ```
 
+→ [Read more about `all`](/api/reading/get/)
+
 ## `query`
 
 To query documents from a collection:
@@ -73,7 +77,7 @@ users[0]?.data.name;
 //=> "Tati"
 ```
 
-→ [Read more about `query`](/api/reading/query/)
+→ [Read more about `many`](/api/reading/many/)
 
 ## Realtime
 
@@ -99,4 +103,4 @@ const off = db.users
 off();
 ```
 
-→ [Read more about realtime](/advanced/core/realtime/)
+→ [Read more about realtime](/advanced/realtime/)

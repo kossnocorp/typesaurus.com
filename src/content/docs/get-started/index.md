@@ -7,8 +7,8 @@ sidebar:
 
 Follow this guide to quickly start with Typesaurus in your project.
 
-:::caution[Before you start!]
-I highly recommend reading the whole **Getting started** section. However, if you're eager to jump right into the code, consider at least finishing [Type safety](/get-started/type-safety/) as it covers the essential concepts, will help you avoid common pitfalls, and fix the most common type errors.
+:::tip[Before you start!]
+I highly recommend reading or skimming the whole **Getting started** and **Type safety** sections. However, feel free to jump right into code and get back when you encounter a problem or want to learn more.
 :::
 
 ## Installation
@@ -37,7 +37,7 @@ Use recommended TypeScript config to make the most of Typesaurus:
 }
 ```
 
-→ [Read more recommended config](/get-started/type-safety/#recommended-config)
+→ [Read more recommended config](/type-safety/tsconfig/)
 
 ## Using
 
@@ -84,6 +84,8 @@ interface Book {
 ```
 
 → [Read more about defining schema](/get-started/schema/)
+
+→ [Learn designing schema best practices](/type-safety/designing/)
 
 ### Using the db
 

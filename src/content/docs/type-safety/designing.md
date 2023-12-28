@@ -1,8 +1,8 @@
 ---
 title: Designing schema
-description: Desinging Firestore database schema with Typesaurus
+description: Designing Firestore database schema with Typesaurus
 sidebar:
-  order: 2
+  order: 8
   badge: TODO
 ---
 

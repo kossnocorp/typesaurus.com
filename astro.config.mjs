@@ -30,6 +30,12 @@ export default defineConfig({
           },
         },
         {
+          label: "Type safety",
+          autogenerate: {
+            directory: "type-safety",
+          },
+        },
+        {
           label: "About",
           autogenerate: {
             directory: "about",
@@ -37,20 +43,9 @@ export default defineConfig({
         },
         {
           label: "Advanced",
-          items: [
-            {
-              label: "Core",
-              autogenerate: {
-                directory: "advanced/core",
-              },
-            },
-            {
-              label: "Extensions",
-              autogenerate: {
-                directory: "advanced/extensions",
-              },
-            },
-          ],
+          autogenerate: {
+            directory: "advanced",
+          },
         },
         {
           label: "Integrations",

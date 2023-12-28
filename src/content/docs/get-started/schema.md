@@ -4,9 +4,13 @@ sidebar:
   order: 1
 ---
 
+In this document, you'll learn how to define your database schema with Typesaurus.
+
+If you're looking for more advanced schema designing tips, check out the [Designing schema guide](/type-safety/designing/).
+
 ## `schema`
 
-You define database structure by importing [`schema`](/api/schema) from [`typesaurus`] and describing each collection using [`$` helper](#helper):
+You define database structure by importing [`schema`](/api/schema) from [`typesaurus`] and describing each collection using [`$` helper](/api/schema#-helper):
 
 ```ts
 import { schema } from "typesaurus";
@@ -24,7 +28,7 @@ interface User {
 
 ## `Typesaurus.Schema`
 
-You'll find handy to use `Typesaurus.Schema` type to expose your defined schema types:
+You'll find it handy to use `Typesaurus.Schema` type to expose your defined schema types:
 
 ```ts
 import { schema, Typesaurus } from "typesaurus";
@@ -87,7 +91,7 @@ const id = await db.users.sub.notes.id();
 
 ## Renaming collection
 
-If you want to use different path to access Firestore (e.g. to keep legacy naming), you can use `name` method:
+If you want to use a different path to access Firestore (e.g. to keep legacy naming), you can use `name` method:
 
 ```ts
 import { schema } from "typesaurus";
