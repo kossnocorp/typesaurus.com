@@ -105,7 +105,7 @@ function removeOrganization(organizationId: Schema["organizations"]["Id"]) {
 
 → [Read more about the `Id` type](/types/id)
 
-→ [When to use shared ids](/type-safety/designing/#sharing-ids)
+→ [When to use shared ids](/design/sharing-ids/)
 
 :::caution[Using inferred schema]
 While it's possible to use [inferred schema](/type-safety/inferring-schema/) to access organization id `Schema["organizations"]["Id]` elsewhere else, including the schema models, you can't use it to define the schema collections as it will cause a circular type.
@@ -127,4 +127,4 @@ db.regionStats.update("us", ($) => {
 });
 ```
 
-→ [When to use static ids](/type-safety/designing/#single-document-collections)
+→ [When to use static ids](/design/limited-collections/)

@@ -123,4 +123,4 @@ report?.update(($) =>
 It all might seem redundant, but that's the only to ensure data consistency, so the hurdle is well worth it.
 :::
 
-→ [Learn about designing models that are easy to update](/type-safety/designing/#updatability)
+→ [Learn about designing models that are easy to update](/design/updatability/)

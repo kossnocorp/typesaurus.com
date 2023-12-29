@@ -93,4 +93,4 @@ const user = await db.users.get(userId);
 user && hello(user.data);
 ```
 
-Although this is an extreme example, and you most likely won't need to do anything, as [you should avoid undefineds anyway](/type-safety/designing/#null-over-undefined), it illustrates the problem very well.
+Although this is an extreme example, and you most likely won't need to do anything, as [you should avoid undefineds anyway](/design/null-over-undefined/), it illustrates the problem very well.

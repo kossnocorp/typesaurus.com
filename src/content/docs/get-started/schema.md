@@ -6,7 +6,7 @@ sidebar:
 
 In this document, you'll learn how to define your database schema with Typesaurus.
 
-If you're looking for more advanced schema designing tips, check out the [Designing schema guide](/type-safety/designing/).
+If you're looking for more advanced schema designing tips, check out the [Designing schema guide](/design/best-practices/).
 
 ## `schema`
 

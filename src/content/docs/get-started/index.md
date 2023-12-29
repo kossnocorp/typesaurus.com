@@ -85,7 +85,7 @@ interface Book {
 
 → [Read more about defining schema](/get-started/schema/)
 
-→ [Learn designing schema best practices](/type-safety/designing/)
+→ [Learn designing schema best practices](/design/best-practices/)
 
 ### Using the db
 

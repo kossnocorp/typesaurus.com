@@ -24,16 +24,40 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Get started",
-          autogenerate: {
-            directory: "get-started",
-          },
-        },
-        {
-          label: "Type safety",
-          autogenerate: {
-            directory: "type-safety",
-          },
+          label: "Guides",
+          items: [
+            {
+              label: "Get started",
+              autogenerate: {
+                directory: "get-started",
+              },
+            },
+            {
+              label: "Type safety",
+              autogenerate: {
+                directory: "type-safety",
+              },
+            },
+            {
+              label: "Designing schema",
+              autogenerate: {
+                directory: "design",
+              },
+            },
+
+            {
+              label: "Advanced",
+              autogenerate: {
+                directory: "advanced",
+              },
+            },
+            {
+              label: "Integrations",
+              autogenerate: {
+                directory: "integrations",
+              },
+            },
+          ],
         },
         {
           label: "About",
@@ -42,62 +66,55 @@ export default defineConfig({
           },
         },
         {
-          label: "Advanced",
-          autogenerate: {
-            directory: "advanced",
-          },
-        },
-        {
-          label: "Integrations",
-          autogenerate: {
-            directory: "integrations",
-          },
-        },
-        {
-          label: "API",
+          label: "Reference",
           items: [
             {
-              label: "schema",
-              link: "/api/schema",
-              badge: "TODO",
+              label: "API",
+              items: [
+                {
+                  label: "schema",
+                  link: "/api/schema",
+                  badge: "TODO",
+                },
+                {
+                  label: "Reading data",
+                  autogenerate: {
+                    directory: "api/reading",
+                  },
+                },
+                {
+                  label: "Writing data",
+                  autogenerate: {
+                    directory: "api/writing",
+                  },
+                },
+                {
+                  label: "Extensions",
+                  autogenerate: {
+                    directory: "api/extensions",
+                  },
+                },
+                {
+                  label: "Constructors",
+                  autogenerate: {
+                    directory: "api/constructors",
+                  },
+                },
+              ],
             },
             {
-              label: "Reading data",
+              label: "Classes",
               autogenerate: {
-                directory: "api/reading",
+                directory: "classes",
               },
             },
             {
-              label: "Writing data",
+              label: "Types",
               autogenerate: {
-                directory: "api/writing",
-              },
-            },
-            {
-              label: "Extensions",
-              autogenerate: {
-                directory: "api/extensions",
-              },
-            },
-            {
-              label: "Constructors",
-              autogenerate: {
-                directory: "api/constructors",
+                directory: "types",
               },
             },
           ],
-        },
-        {
-          label: "Classes",
-          autogenerate: {
-            directory: "classes",
-          },
-        },
-        {
-          label: "Types",
-          autogenerate: {
-            directory: "types",
-          },
         },
       ],
       editLink: {

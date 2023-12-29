@@ -8,7 +8,7 @@ There are several limitations on how you can use arrays with Firestore. To preve
 
 ## Nested arrays
 
-Firestore doesn't allow to have an array as an array item, but it can be nested in an object.
+Firestore doesn't allow an array as an array item but can be nested in an object.
 
 To prevent runtime errors, Typesaurus doesn't allow to set such a structure:
 
@@ -68,4 +68,4 @@ await db.posts.update(postId, ($) =>
 );
 ```
 
-→ [Learn about using arrays when designing schema](/type-safety/designing/#using-arrays)
+→ [Learn about using arrays when designing schema](/design/using-arrays/)
