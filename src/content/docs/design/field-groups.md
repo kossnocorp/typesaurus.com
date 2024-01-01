@@ -2,7 +2,6 @@
 title: Field groups
 sidebar:
   order: 3
-  badge: TODO
 ---
 
 Even though it's intuitive to keep documents as flat as possible, just like you would do in a traditional SQL database, it's not always the best idea with Firestore.
@@ -40,7 +39,7 @@ type Post = {
 
 It's already messy, but even though we just have three fields! Imagine how it would look with more conditional fields.
 
-There's another problem: since it's an intersection, we can't access `deletedAt` without a property check:
+There's another problem: since it's a union, we can't access `deletedAt` without the property check:
 
 ```ts
 // Nope
@@ -84,3 +83,31 @@ post.deleted;
 ```
 
 Neat!
+
+:::tip[Do you need variable models?]
+Most of the time, you can add variability to documents by using field groups. However, if your documents differ too much, consider using [variable models](/type-safety/variable/).
+:::
+
+Fields groups allow you to define relations between fields, which leads to better type safety and readability. Since there's no penalty for nesting objects in Firestore, whenever you feel you might need group fields - go for it!
+
+Furthermore, it enables you to share such groups with other models, making your database more consistent and easier to maintain:
+
+```ts
+interface Post {
+  text: string;
+  deleted?: SoftDeleted;
+}
+
+interface Project {
+  title: string;
+  deleted?: SoftDeleted;
+}
+
+// You share the doc comments too!
+interface SoftDeleted {
+  /** When the document was deleted */
+  at: Date;
+  /** Who deleted the document */
+  by: string;
+}
+```
