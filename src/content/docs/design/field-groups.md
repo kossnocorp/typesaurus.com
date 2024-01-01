@@ -111,3 +111,7 @@ interface SoftDeleted {
   by: string;
 }
 ```
+
+:::tip[Learn about query flags]
+The field groups work the best with query flags, so make sure to [learn about them](/design/query-flags/) too!
+:::
