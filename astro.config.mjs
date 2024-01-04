@@ -114,6 +114,12 @@ export default defineConfig({
                 directory: "types",
               },
             },
+            {
+              label: "Helpers",
+              autogenerate: {
+                directory: "helpers",
+              },
+            },
           ],
         },
       ],

@@ -2,6 +2,7 @@
 title: Collection
 sidebar:
   badge: TODO
+  order: 1
 ---
 
 # `Collection`
