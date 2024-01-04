@@ -60,12 +60,6 @@ export default defineConfig({
           ],
         },
         {
-          label: "About",
-          autogenerate: {
-            directory: "about",
-          },
-        },
-        {
           label: "Reference",
           items: [
             {
@@ -121,6 +115,12 @@ export default defineConfig({
               },
             },
           ],
+        },
+        {
+          label: "About",
+          autogenerate: {
+            directory: "about",
+          },
         },
       ],
       editLink: {
