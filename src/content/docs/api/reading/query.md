@@ -2,7 +2,6 @@
 title: query
 sidebar:
   order: 3
-  badge: TODO
 ---
 
 To query a collection, use the `query` method on [`Collection`](/classes/collection/#query):
@@ -123,58 +122,241 @@ await db.users.query(($) =>
 );
 ```
 
-The result of the `$.field` provides few methods that define the query.
+The result of the `$.field` provides a few methods that define the query:
+
+- [`$.field(...).eq`](#fieldeq) - field is equal to a value
+- [`$.field(...).not`](#fieldnot) - field is not equal to a value
+- [`$.field(...).lt`](#fieldlt) - field is less than a value
+- [`$.field(...).lte`](#fieldlte) - field is less or equal to a value
+- [`$.field(...).gt`](#fieldgt) - field is greater than a value
+- [`$.field(...).gte`](#fieldgte) - field is greater or equal to a value
+- [`$.field(...).in`](#fieldin) - field is in an array of values
+- [`$.field(...).notIn`](#fieldnotin) - field is not in an array of values
+- [`$.field(...).contains`](#fieldcontains) - field array contains a value
+- [`$.field(...).containsAny`](#fieldcontainsany) - field array contains any of the values
+- [`$.field(...).order`](#fieldorder) - order the query by the field
 
 #### `$.field(...).eq`
 
+To query documents where the field is equal to a value, use the `eq` method:
+
+```ts
+await db.users.query(($) =>
+  // Query users named Alexander
+  $.field("profile", "name", "first").eq("Alexander"),
+);
+```
+
 #### `$.field(...).not`
+
+To query documents where the field is not equal to a value, use the `not` method:
+
+```ts
+await db.users.query(($) =>
+  // Query users not named Alexander
+  $.field("profile", "name", "first").not("Alexander"),
+);
+```
+
+:::tip[Keep in mind!]
+Firestore will not return documents if the field is not set. So consider using [query flags](/design/query-flags/) or making the field required if you need it to query all documents.
+:::
 
 #### `$.field(...).lt`
 
+To query documents where the field is less than a value, use the `lt` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games with rating less than 3
+  $.field("rating").lt(3),
+);
+```
+
+The method only works with numbers and dates.
+
 #### `$.field(...).lte`
+
+To query documents where the field is less or equal to a value, use the `lte` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games with rating 3 or less
+  $.field("rating").lte(3),
+);
+```
+
+The method only works with numbers and dates.
 
 #### `$.field(...).gt`
 
+To query documents where the field is greater than a value, use the `gt` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games with rating greater than 8
+  $.field("rating").gt(8),
+);
+```
+
+The method only works with numbers and dates.
+
 #### `$.field(...).gte`
+
+To query documents where the field is greater or equal to a value, use the `gte` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games with rating 8 or greater
+  $.field("rating").gte(8),
+);
+```
+
+The method only works with numbers and dates.
 
 #### `$.field(...).in`
 
+To query documents where the field is in an array of values, use the `in` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games published by Nintendo or Sony
+  $.field("publisher").in(["Nintendo", "Sony"]),
+);
+```
+
 #### `$.field(...).notIn`
+
+To query documents where the field is not in an array of values, use the `notIn` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games not published by Nintendo or Sony
+  $.field("publisher").notIn(["Nintendo", "Sony"]),
+);
+```
 
 #### `$.field(...).contains`
 
+To query documents where the field array contains a value, use the `contains` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games that has rpg tag
+  $.field("tags").contains("rpg"),
+);
+```
+
+The method only works with arrays.
+
 #### `$.field(...).containsAny`
+
+To query documents where the field array contains any of the values, use the `containsAny` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games that has rpg or action tag
+  $.field("tags").containsAny(["rpg", "action"]),
+);
+```
+
+The method only works with arrays.
 
 #### `$.field(...).order`
 
+To order the query by the field, use the `order` method:
+
+```ts
+await db.games.query(($) =>
+  // Order games published between 2000 and 2010 by year
+  $.field("year").order("desc", [$.startAt(2000), $.endAt(2010)]),
+);
+```
+
+It accepts the optional direction (`"asc" | "desc"`) and optionally the range of values to order by. You can call the method without any arguments to order by the field in ascending order:
+
+```ts
+await db.games.query(($) =>
+  // Order games by year in ascending order
+  $.field("year").order(),
+);
+```
+
+The field helpers that can be used to define the range are:
+
+- [`$.startAt`](#startat) - start the range at a value
+- [`$.startAfter`](#startafter) - start the range after a value
+- [`$.endAt`](#endat) - end the range at a value
+- [`$.endBefore`](#endbefore) - end the range before a value
+
 ### `$.limit`
+
+To limit the number of documents returned by the query, use the `limit` method:
+
+```ts
+await db.users.query(($) =>
+  // Query 10 users
+  $.limit(10),
+);
+```
 
 ### `$.startAt`
 
+To start the range at a value, use the `startAt` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games published 2000 or later
+  $.field("year").order($.startAt(2000)),
+);
+```
+
 ### `$.startAfter`
+
+To start the range after a value, use the `startAfter` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games published after 2019
+  $.field("year").order($.startAfter(2019)),
+);
+```
 
 ### `$.endAt`
 
+To end the range at a value, use the `endAt` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games published 2019 or earlier
+  $.field("year").order($.endAt(2019)),
+);
+```
+
 ### `$.endBefore`
+
+To end the range before a value, use the `endBefore` method:
+
+```ts
+await db.games.query(($) =>
+  // Query games published before 2000
+  $.field("year").order($.endBefore(2000)),
+);
+```
 
 ### `$.docId`
 
-## Options
-
-You can tell Typesaurus that it's safe to use dates by passing `as` option:
+To use the document id in the query, use the `$.docId` method:
 
 ```ts
-const users = await db.users.query(
-  ($) => [
-    $.field("name").eq("Sasha"),
-    $.field("birthday").gte(new Date(2000, 1, 1)),
-  ],
-  { as: "server" }
-);
-
-users?[0].data.createdAt;
-//=> Date, without { as: "server" } would be Date | undefined
+await db.users.query(($) => [
+  // Query users after the last user id
+  $.field($.docId()).order($.startAfter(lastUserId)),
+  $.limit(25),
+]);
 ```
+
+It effectively allows you to [paginate the query](#pagination).
 
 ## Options
 
