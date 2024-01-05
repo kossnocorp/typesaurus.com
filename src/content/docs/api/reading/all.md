@@ -2,7 +2,6 @@
 title: all
 sidebar:
   order: 2
-  badge: TODO
 ---
 
 To get all documents in a collection, use the `all` method on [`Collection`](/classes/collection/#all).
