@@ -2,12 +2,9 @@
 title: get
 sidebar:
   order: 1
-  badge: TODO
 ---
 
-# `get`
-
-To get the latest version of a document, use `get` method on [`Collection`](/docs/classes/collection), [`Ref`](/docs/classes/ref) and [`Doc`](/docs/classes/doc):
+The method allows to read a document by its id. It's available on [`Collection`](/classes/collection/#get), [`Ref`](/classes/ref/#get) and [`Doc`](/classes/doc/#get):
 
 ```ts
 // Collection
@@ -20,10 +17,13 @@ await userRef.get();
 await userDoc.get();
 ```
 
-The method returns [`Doc`](/docs/classes/doc) instance or `null`:
+The method returns [`Doc`](/classes/doc) instance or `null` if the document doesn't exist:
 
 ```ts
 const userRef = await db.users.get();
+//=> null | Doc<User>
+
+// Update the user
 await userRef?.update({ name: "Alexander" });
 ```
 
@@ -51,24 +51,24 @@ db.users
   });
 ```
 
+→ [Read more about subscribing to real-time updates](/advanced/realtime/)
+
 ## Options
 
-You can tell Typesaurus that it's safe to use dates by passing `as` option:
+### `as`
+
+You can tell Typesaurus that it's safe to use dates by passing `as` option (`"server" | "client"`):
 
 ```ts
-const user = await db.users.get(userId, { as: "server" });
+const serverUser = await db.users.get(userId, { as: "server" });
+serverUser && serverUser.data.createdAt;
+//=> Date
 
-user?.data.createdAt;
-//=> Date, without { as: "server" } would be Date | undefined
+const clientUser = await db.users.get(userId, { as: "client" });
+clientUser && clientUser.data.createdAt;
+//=> Date | null
 ```
 
-[Read more about server dates](/docs/advanced/serverdates).
+By default Typesaurus uses `"client"` option.
 
----
-
-See other reading methods:
-
-- [get](/docs/api/get)
-- [all](/docs/api/all)
-- [query](/docs/api/query)
-- [many](/docs/api/many)
+→ [Read more about server dates](/type-safety/server-dates/).

@@ -4,3 +4,5 @@ sidebar:
   badge: TODO
   order: 3
 ---
+
+## `get`
