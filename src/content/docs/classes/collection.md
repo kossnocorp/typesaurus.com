@@ -5,11 +5,13 @@ sidebar:
   order: 1
 ---
 
-# `Collection`
-
 ## `get`
 
 ## `all`
+
+## `query`
+
+## `many`
 
 ## `sub`
 

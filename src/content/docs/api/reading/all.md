@@ -32,13 +32,26 @@ To catch errors, use `catch` after calling `on`:
 ```ts
 db.users
   .all()
-  .on((allUsers) => {
+  .on((users) => {
     // ...
   })
   .catch((error) => {
     //=> PERMISSION_DENIED: Missing or insufficient permissions
   });
 ```
+
+To stop listening to the updates, call the `off` function returned from the method:
+
+```ts
+const off = db.users.all().on((users) => {
+  // ...
+});
+
+// Unsubscribe after 5 seconds
+setTimeout(off, 5000);
+```
+
+→ [Read more about subscribing to real-time updates](/advanced/realtime/)
 
 ## Options
 

@@ -5,33 +5,32 @@ sidebar:
   badge: TODO
 ---
 
-# `query`
+To query a collection, use the `query` method on [`Collection`](/classes/collection/#query):
 
-To query a collection, use `query` method on [`Collection`](/docs/classes/collection):
+It accepts a function as the argument, where you define the query.
 
-It accepts `($: TypesaurusQuery.Helpers<Def>) => Data<Def['Model']>` as the argument, the function where you define the query:
+The method returns an array of [`Doc`](/classes/doc) instances:
 
 ```ts
 await db.users.query(($) => [
-  $.field("name").equal("Sasha"),
-  $.field("birthday").moreOrEqual(new Date(2000, 1, 1)),
+  $.field("name").eq("Sasha"),
+  $.field("birthday").gte(new Date(2000, 1, 1)),
 ]);
+//=> Doc<User>[]
 ```
-
-The method returns [`Doc[]`](/docs/classes/doc).
 
 ## Subscription
 
-Instead of awaiting the promise returned from `query`, you can call `on` on it, to subscribe to the document updates:
+Instead of awaiting the promise returned from `query`, you can call `on` on it to subscribe to the document updates:
 
 ```ts
 db.users
   .query(($) => [
-    $.field("name").equal("Sasha"),
-    $.field("birthday").moreOrEqual(new Date(2000, 1, 1)),
+    $.field("name").eq("Sasha"),
+    $.field("birthday").gte(new Date(2000, 1, 1)),
   ])
   .on((users) => {
-    // ...
+    // Doc<User>[]
   });
 ```
 
@@ -40,25 +39,42 @@ To catch errors, use `catch` after calling `on`:
 ```ts
 db.users
   .query(($) => [
-    $.field("name").equal("Sasha"),
-    $.field("birthday").moreOrEqual(new Date(2000, 1, 1)),
+    $.field("name").eq("Sasha"),
+    $.field("birthday").gte(new Date(2000, 1, 1)),
   ])
   .on((users) => {
     // ...
   });
   .catch((error) => {
-    error;
-    // Don't have permission!
+    //=> PERMISSION_DENIED: Missing or insufficient permissions
   });
 ```
 
+To stop listening to the updates, call the `off` function returned from the method:
+
+```ts
+const off = db.users
+  .query(($) => [
+    $.field("name").eq("Sasha"),
+    $.field("birthday").gte(new Date(2000, 1, 1)),
+  ])
+  .on((users) => {
+    // ...
+  });
+
+// Unsubscribe after 5 seconds
+setTimeout(off, 5000);
+```
+
+→ [Read more about subscribing to real-time updates](/advanced/realtime/)
+
 ## Pagination
 
-To paginate data, use one of methods provided by [`$` helpers](#helpers):
+To paginate data, use one of methods provided by [the `$` helper](#-helper):
 
 ```ts
 await db.users.query(($) => [
-  // $.docId - use id for sorting
+  // $.docId - use the id for sorting
   $.field($.docId()).order($.startAfter(lastUserId)),
   // Every page - 25 documents
   $.limit(25),
@@ -67,96 +83,81 @@ await db.users.query(($) => [
 
 Use last user id, starting with `undefined`, to query the page, `$.limit` to specify the page size.
 
-> Note that when quering large datasets with a lot of similar data, i.e. by name, ordering by that data might cause Firestore skip pages, so unless you know why - use `$.docId()`.
+:::caution[Keep in mind!]
+When querying extensive collections with similar data, i.e., using `name` or `country,` ordering by that data might cause Firestore to skip pages. So unless you know why - use `$.docId()`.
+:::
 
-## Helpers
+## `$` helper
 
-The query helper `$`, contains several methods that will help you build your query:
+The argument function receives `$` helper object as the first argument that provides the query API.
 
-- [`$.field`](#field)
-- [`$.limit`](#limit)
-- [`$.startAt`](#startat)
-- [`$.startAfter`](#startafter)
-- [`$.endAt`](#endat)
-- [`$.endBefore`](#endbefore)
+`$` type is `TypesaurusQuery.Helpers<Def>`.
+
+You can return either a single query, array of queries or falsy value to skip the query and return `undefined`:
+
+```ts
+// Single query
+await db.users.query(($) => $.field("name").eq("Sasha"));
+//=> Doc<User>[]
+
+// Array of queries
+await db.users.query(($) => [
+  $.field("name").eq("Sasha"),
+  $.field("birthday").gte(new Date(2000, 1, 1)),
+]);
+//=> Doc<User>[]
+
+// If name is string or null:
+await db.users.query(($) => name && $.field("name").eq(name));
+//=> undefined | Doc<User>[]
+```
 
 ### `$.field`
 
-The method selects a given field, including nested paths:
+The `$.field` allows you to target specific fields in the document. It allows you to query nested fields as well:
 
 ```ts
 await db.users.query(($) =>
   // Where profile.name.first is Alexander
-  $.field("profile", "name", "first").equal("Alexander"),
+  $.field("profile", "name", "first").eq("Alexander"),
 );
 ```
 
-The result of field provides few methods that define the query:
+The result of the `$.field` provides few methods that define the query.
 
-- [`$.field.less`](#fieldless)
-- [`$.field.lessOrEqual`](#fieldlessorequal)
-- [`$.field.equal`](#fieldequal)
-- [`$.field.not`](#fieldnot)
-- [`$.field.more`](#fieldmore)
-- [`$.field.moreOrEqual`](#fieldmoreorequal)
-- [`$.field.in`](#fieldin)
-- [`$.field.notin`](#fieldnotin)
+#### `$.field(...).eq`
 
-#### `$.field.less`
+#### `$.field(...).not`
 
-TODO
+#### `$.field(...).lt`
 
-#### `$.field.lessOrEqual`
+#### `$.field(...).lte`
 
-TODO
+#### `$.field(...).gt`
 
-#### `$.field.equal`
+#### `$.field(...).gte`
 
-TODO
+#### `$.field(...).in`
 
-#### `$.field.not`
+#### `$.field(...).notIn`
 
-TODO
+#### `$.field(...).contains`
 
-#### `$.field.more`
+#### `$.field(...).containsAny`
 
-TODO
-
-#### `$.field.moreOrEqual`
-
-TODO
-
-#### `$.field.in`
-
-TODO
-
-#### `$.field.notIn`
-
-TODO
+#### `$.field(...).order`
 
 ### `$.limit`
 
-TODO
-
 ### `$.startAt`
-
-TODO
 
 ### `$.startAfter`
 
-TODO
-
 ### `$.endAt`
-
-TODO
 
 ### `$.endBefore`
 
-TODO
-
 ### `$.docId`
-
-TODO
 
 ## Options
 
@@ -165,8 +166,8 @@ You can tell Typesaurus that it's safe to use dates by passing `as` option:
 ```ts
 const users = await db.users.query(
   ($) => [
-    $.field("name").equal("Sasha"),
-    $.field("birthday").moreOrEqual(new Date(2000, 1, 1)),
+    $.field("name").eq("Sasha"),
+    $.field("birthday").gte(new Date(2000, 1, 1)),
   ],
   { as: "server" }
 );
@@ -175,13 +176,26 @@ users?[0].data.createdAt;
 //=> Date, without { as: "server" } would be Date | undefined
 ```
 
-[Read more about server dates](/docs/advanced/serverdates).
+## Options
 
----
+### `as`
 
-See other reading methods:
+You can tell Typesaurus that it's safe to use dates by passing the `as` option (`"server" | "client"`):
 
-- [get](/docs/api/get)
-- [all](/docs/api/all)
-- [query](/docs/api/query)
-- [many](/docs/api/many)
+```ts
+const [serverUser] = await db.users.query(($) => $.field("name").eq("Sasha"), {
+  as: "server",
+});
+serverUser && serverUser.data.createdAt;
+//=> Date
+
+const [clientUser] = await db.users.query(($) => $.field("name").eq("Sasha"), {
+  as: "client",
+});
+clientUser && clientUser.data.createdAt;
+//=> Date | null
+```
+
+By default, Typesaurus uses `"client"` option.
+
+→ [Read more about server dates](/type-safety/server-dates/).

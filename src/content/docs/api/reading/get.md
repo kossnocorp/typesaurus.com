@@ -26,6 +26,17 @@ db.users.get(userId).on((user) => {
 });
 ```
 
+To stop listening to the updates, call the `off` function returned from the method:
+
+```ts
+const off = db.users.get(userId).on((user) => {
+  // ...
+});
+
+// Unsubscribe after 5 seconds
+setTimeout(off, 5000);
+```
+
 To catch errors, use `catch` after calling `on`:
 
 ```ts
