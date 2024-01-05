@@ -6,3 +6,5 @@ sidebar:
 ---
 
 ## `get`
+
+## `narrow`

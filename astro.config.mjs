@@ -81,19 +81,13 @@ export default defineConfig({
                     directory: "api/writing",
                   },
                 },
-                {
-                  label: "Extensions",
-                  autogenerate: {
-                    directory: "api/extensions",
-                  },
-                },
-                {
-                  label: "Constructors",
-                  autogenerate: {
-                    directory: "api/constructors",
-                  },
-                },
               ],
+            },
+            {
+              label: "Extensions",
+              autogenerate: {
+                directory: "extensions",
+              },
             },
             {
               label: "Classes",
