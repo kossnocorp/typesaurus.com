@@ -2,9 +2,9 @@
 title: schema
 ---
 
-To create a database instance, use `schema` method.
+The `schema` creates a database instance from the given schema.
 
-It accepts `($: TypesaurusCore.SchemaHelpers) => TypesaurusCore.Schema` as the argument, the function where you define the database structure:
+It accepts a function as the argument, where you define the database structure:
 
 ```ts
 import { schema } from "typesaurus";
@@ -33,35 +33,26 @@ What you return from the function, defines the database structure.
 
 ## `$` helper
 
-`$` is the helpers object that exposes the `schema` API.
+The argument function receives `$` helper object as the first argument that provides the `schema` API.
 
-The type is `TypesaurusCore.SchemaHelpers`.
+`$` type is `TypesaurusCore.SchemaHelpers`.
 
 ### `$.collection`
 
-The function creates a collection with the given model. The key you assign the collection to, Typesaurus will use as the collection path:
+The `$.collection` function creates a collection with the given model. The key you assign the collection to, Typesaurus will use as the collection path:
 
 ```ts
 import { schema } from "typesaurus";
 
 const db = schema(($) => ({
-  // users - the path
-  // User - the model
+  // `users` is the the path, `User` is the model
   users: $.collection<User>(),
 }));
-
-interface Account {
-  name: string;
-}
 ```
 
-[You can customize the path, see `collection.name`](#collectionname)
+→ [You can customize the path, see `collection.name`](#collectionname)
 
-#### `$.collection(...).sub`
-
-#### `$.collection(...).name`
-
-#### `$.collection` generics
+#### Generics
 
 ##### `Model`
 
@@ -79,6 +70,8 @@ interface Account {
   type: string;
 }
 ```
+
+It defines the shape of the documents in the collection.
 
 You can also use a variable model where document can be only one of the given types:
 
@@ -106,13 +99,13 @@ interface GoogleAccount {
 }
 ```
 
-> It helps to simplify and secure operations on mixed document types.
+It helps to simplify and secure operations on mixed document types.
 
-[Read more about variable models](/docs/advanced/variable).
+→ [Read more about variable models](/type-safety/variable/)
 
 ##### `CustomId`
 
-The second generic param allows to set id type to the collectio, allowing you accessing i.e. `credentials` collection using `accountId` and vice versa.
+The second optional generic param allows to set id type to the collection, allowing accessing i.e., `credentials` collection using `accountId` and vice versa.
 
 ```ts
 import { schema, Typesaurus } from "typesaurus";
@@ -123,11 +116,12 @@ const db = schema(($) => ({
   users: $.User(),
 }));
 
-await db.users.update(accountId, { userId: "123" });
-//                    ^^^^^^^^^ wrong id
-
 await db.credentials.update(accountId, { key: null });
 ```
+
+→ [Read more about shared ids](/type-safety/typed-ids/#shared-ids)
+
+---
 
 You can also set a `string`, enum or union as the id type, that allows you to specify set of allowed ids:
 
@@ -141,12 +135,59 @@ const db = schema(($) => ({
 await db.stats.update("sg", ($) => ({ users: $.increment(1) }));
 ```
 
-## `collection`
+→ [Read more about static ids](/type-safety/typed-ids/#static-ids)
 
-### `collection.type`
+### `$.collection(...).sub`
 
-Always `"collection"`.
+The `sub` function creates a subcollection:
 
-### `collection.sub`
+```ts
+import { schema } from "typesaurus";
 
-### `collection.name`
+const db = schema(($) => ({
+  posts: $.collection<Post>().sub({
+    comments: $.collection<Comment>(),
+  }),
+}));
+```
+
+The subcollection path will be `posts/{postId}/comments` and the id will be [`Id<"posts/comments">`](/types/id/).
+
+You can access a subcollection calling the partent collection with an id:
+
+```ts
+// Fetch all post comments
+await db.posts(postId).comments.all();
+```
+
+The subcollections can be nested as well:
+
+```ts
+// Fetch all post comment ratings
+await db.posts(postId).comments(commentId).ratings.all();
+```
+
+When you need to access a subcollection, i.e. to convert string to its id, you can use [`sub`](/classes/collection/#sub) property:
+
+```ts
+await db.posts.sub.comments.sub.ratings.id("rating-id");
+```
+
+### `$.collection(...).name`
+
+By default the collection has the same name as the key you assign it to. But you can customize it using `name` property:
+
+```ts
+const db = schema(($) => ({
+  subscriptions: $.collection<Subscription>().name("billing"),
+}));
+```
+
+It will allow you to access collection via the alias `subscription` while keeping the original name in the database:
+
+```ts
+// Will fetch "billing/{subscriptionId}" document
+await db.subscriptions.get(subscriptionId);
+```
+
+The name also affects the collection id type, so for our example it will be [`Id<"billing">`](/types/id/).

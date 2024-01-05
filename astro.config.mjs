@@ -68,7 +68,6 @@ export default defineConfig({
                 {
                   label: "schema",
                   link: "/api/schema",
-                  badge: "TODO",
                 },
                 {
                   label: "Reading data",
