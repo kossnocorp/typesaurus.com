@@ -9,6 +9,8 @@ sidebar:
 
 ## `get`
 
+## `all`
+
 ## `sub`
 
 The `sub` property allows to access nested subcollections:

@@ -5,26 +5,26 @@ sidebar:
   badge: TODO
 ---
 
-# `all`
+To get all documents in a collection, use the `all` method on [`Collection`](/classes/collection/#all).
 
-To get all documents in a collection, use `all` method on [`Collection`](/docs/classes/collection).
-
-> When working on a large database, consider [paginating via `query`](/docs/api/query#paginate) to avoid hitting Firestore connections limit.
+The method returns an array of [`Doc`](/classes/doc) instances:
 
 ```ts
 await db.users.all();
-// [{...}, {...}]
+//=> Doc<User>[]
 ```
 
-The method returns [`Doc[]`](/docs/classes/doc).
+:::tip[Paginate with query]
+When working on a large database, consider [paginating via `query`](/api/reading/query/#pagination) to avoid hitting the Firestore connections limit.
+:::
 
 ## Subscription
 
-Instead of awaiting the promise returned from `all`, you can call `on` on it, to subscribe to the document updates:
+Instead of awaiting the promise returned from `all`, you can call `on` on it to subscribe to the document updates:
 
 ```ts
-db.users.all().on((allUsers) => {
-  // ...
+db.users.all().on((users) => {
+  // Doc<User>[]
 });
 ```
 
@@ -37,29 +37,26 @@ db.users
     // ...
   })
   .catch((error) => {
-    error;
-    // Don't have permission!
+    //=> PERMISSION_DENIED: Missing or insufficient permissions
   });
 ```
 
 ## Options
 
-You can tell Typesaurus that it's safe to use dates by passing `as` option:
+### `as`
+
+You can tell Typesaurus that it's safe to use dates by passing the `as` option (`"server" | "client"`):
 
 ```ts
-const user = await db.users.all({ as: "server" });
+const [serverUser] = await db.users.all({ as: "server" });
+serverUser && serverUser.data.createdAt;
+//=> Date
 
-user?.data.createdAt;
-//=> Date, without { as: "server" } would be Date | undefined
+const [clientUser] = await db.users.all({ as: "client" });
+clientUser && clientUser.data.createdAt;
+//=> Date | null
 ```
 
-[Read more about server dates](/docs/advanced/serverdates).
+By default, Typesaurus uses `"client"` option.
 
----
-
-See other reading methods:
-
-- [get](/docs/api/get)
-- [all](/docs/api/all)
-- [query](/docs/api/query)
-- [many](/docs/api/many)
+→ [Read more about server dates](/type-safety/server-dates/).
