@@ -2,7 +2,6 @@
 title: add
 sidebar:
   order: 1
-  badge: TODO
 ---
 
 The method allows one to add a document to a collection. It's available on [`Collection`](/docs/classes/collection).
@@ -28,10 +27,6 @@ await db.users.add(($) => ({
   createdAt: $.serverDate(),
 }));
 ```
-
-## Variable model
-
-TODO
 
 ## `$` helper
 

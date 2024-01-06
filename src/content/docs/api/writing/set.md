@@ -2,7 +2,6 @@
 title: set
 sidebar:
   order: 2
-  badge: TODO
 ---
 
 The method allows setting a document by its id. It's available on [`Collection`](/classes/collection/#set), [`Ref`](/classes/ref/#set), and [`Doc`](/classes/doc/#set).
@@ -24,10 +23,6 @@ await db.users.set(userId, ($) => ({
   createdAt: $.serverDate(),
 }));
 ```
-
-## Variable model
-
-TODO
 
 ## `$` helper
 
