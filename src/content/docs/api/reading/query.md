@@ -2,6 +2,7 @@
 title: query
 sidebar:
   order: 3
+  badge: TODO
 ---
 
 To query a collection, use the `query` method on [`Collection`](/classes/collection/#query):
@@ -17,6 +18,10 @@ await db.users.query(($) => [
 ]);
 //=> Doc<User>[]
 ```
+
+## Builder mode
+
+TODO
 
 ## Subscription
 
