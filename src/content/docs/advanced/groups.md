@@ -90,4 +90,4 @@ goodPosts.forEach((post) => {
 
 If this example querying `posts` collection got us both `Post` and `UserPost` documents, we must narrow down the type to access the unique `highlight` field. All the shared fields are accessible without narrowing down.
 
-→ [Read more about `groups`](/api/extensions/groups/)
+→ [Read more about `groups`](/extensions/groups/)

@@ -69,4 +69,4 @@ In this example, we update the user rating, level up the subscription if the rat
 Read operations are asynchronous, so you need to `await` them or return a promise. On the other hand, write operations are synchronous, so you shouldn't `await` them. They will perform on the exit from the function.
 :::
 
-→ [Read more about `transaction`](/api/extensions/transaction/)
+→ [Read more about `transaction`](/extensions/transaction/)

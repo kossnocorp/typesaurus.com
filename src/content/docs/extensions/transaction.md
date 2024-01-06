@@ -20,6 +20,8 @@ transaction(db)
 
 The method accepts the database instance as the argument and returns a transaction builder that allows you to chain read and write operations.
 
+→ [Read the transactions guide](/advanced/transactions/)
+
 ## `read`
 
 The `read` method on the object returned by `transaction` accepts a function that receives a `$` helper. In the function, you perform the necessary read operations:

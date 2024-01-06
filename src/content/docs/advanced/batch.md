@@ -33,4 +33,4 @@ The batch allows you to perform all write operations but `add`, because it requi
 
 Just like everything, all batch operations are type-safe.
 
-→ [Read more about `batch`](/api/extensions/batch/)
+→ [Read more about `batch`](/extensions/batch/)

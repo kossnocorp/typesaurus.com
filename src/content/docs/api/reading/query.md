@@ -2,6 +2,7 @@
 title: query
 sidebar:
   order: 3
+  badge: TODO
 ---
 
 To query a collection, use the `query` method on [`Collection`](/classes/collection/#query):
@@ -116,6 +117,10 @@ Use last user id, starting with `undefined`, to query the page, `$.limit` to spe
 :::caution[Keep in mind!]
 When querying extensive collections with similar data, i.e., using `name` or `country,` ordering by that data might cause Firestore to skip pages. So unless you know why - use `$.docId()`.
 :::
+
+## Counting
+
+TODO
 
 ## `$` helper
 
