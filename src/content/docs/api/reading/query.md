@@ -121,7 +121,7 @@ When querying extensive collections with similar data, i.e., using `name` or `co
 
 The argument function receives `$` helper object as the first argument that provides the query API.
 
-`$` type is `TypesaurusQuery.Helpers<Def>`.
+`$` type is `TypesaurusQuery.Helpers`.
 
 You can return either a single query, array of queries or falsy value to skip the query and return `undefined`:
 

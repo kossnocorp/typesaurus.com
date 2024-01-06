@@ -28,7 +28,7 @@ await db.users.set(userId, ($) => ({
 
 The argument function receives the `$` helper object as the first argument that provides write helpers.
 
-`$` type is `TypesaurusCore.WriteHelpers<Model>`.
+`$` type is `TypesaurusCore.WriteHelpers`.
 
 ### `$.serverDate`
 
