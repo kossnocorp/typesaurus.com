@@ -2,7 +2,6 @@
 title: query
 sidebar:
   order: 3
-  badge: TODO
 ---
 
 To query a collection, use the `query` method on [`Collection`](/classes/collection/#query):
@@ -21,7 +20,20 @@ await db.users.query(($) => [
 
 ## Builder mode
 
-TODO
+The `query` also allows you to use the builder mode, where you accumulate the query operations and then call `run` to execute them:
+
+```ts
+// Start building the query
+const $ = db.users.query.build();
+
+$.field("name").eq("Sasha");
+// ...Do something in between, including async operations
+$.field("birthday").gte(new Date(2000, 1, 1));
+
+// Run the query
+await $.run();
+// Doc<User>[]
+```
 
 ## Subscription
 
@@ -68,6 +80,20 @@ const off = db.users
 
 // Unsubscribe after 5 seconds
 setTimeout(off, 5000);
+```
+
+You can also subscribe to query in the builder mode:
+
+```ts
+const $ = db.users.query.build();
+
+$.field("name").eq("Sasha");
+$.field("birthday").gte(new Date(2000, 1, 1));
+
+// Subscribe to the query
+$.run().on((users) => {
+  // Doc<User>[]
+});
 ```
 
 → [Read more about subscribing to real-time updates](/advanced/realtime/)
@@ -384,5 +410,19 @@ clientUser && clientUser.data.createdAt;
 ```
 
 By default, Typesaurus uses the `"client"` option.
+
+The builder mode also accepts the `as` option:
+
+```ts
+const $ = db.users.query.build({ as: "server" });
+
+$.field("name").eq("Sasha");
+$.field("birthday").gte(new Date(2000, 1, 1));
+
+const [serverUser] = await $.run();
+
+serverUser && serverUser.data.createdAt;
+//=> Date
+```
 
 → [Read more about server dates](/type-safety/server-dates/).
