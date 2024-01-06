@@ -69,6 +69,6 @@ clientUser && clientUser.data.createdAt;
 //=> Date | null
 ```
 
-By default, Typesaurus uses `"client"` option.
+By default, Typesaurus uses the `"client"` option.
 
 → [Read more about server dates](/type-safety/server-dates/).

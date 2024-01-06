@@ -4,7 +4,7 @@ sidebar:
   order: 1
 ---
 
-The method allows one to read a document by its id. It's available on [`Collection`](/classes/collection/#get), [`Ref`](/classes/ref/#get) and [`Doc`](/classes/doc/#get):
+The method allows one to read a document by its id. It's available on [`Collection`](/classes/collection/#get), [`Ref`](/classes/ref/#get), and [`Doc`](/classes/doc/#get).
 
 The method returns [`Doc`](/classes/doc) instance or `null` if the document doesn't exist:
 
@@ -68,6 +68,6 @@ clientUser && clientUser.data.createdAt;
 //=> Date | null
 ```
 
-By default, Typesaurus uses `"client"` option.
+By default, Typesaurus uses the `"client"` option.
 
 → [Read more about server dates](/type-safety/server-dates/).

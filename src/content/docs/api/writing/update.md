@@ -5,60 +5,110 @@ sidebar:
   badge: TODO
 ---
 
-# `update`
-
-To update a given document, use `update` method on [`Collection`](/docs/classes/collection), [`Ref`](/docs/classes/ref) and [`Doc`](/docs/classes/doc):
-
-```ts
-await db.users.update(userId, { name: "Sasha" });
-
-await userRef.update({ name: "Sasha" });
-
-await userDoc.update({ name: "Sasha" });
-```
-
-> The method updates the document with partial model payload, so it expects the document to exist otherwise it will throw an error.
->
-> Use [`upset`](/docs/api/upset) if you want to update or set.
-
-The method also accepts a function argument that allows you to use helpers when setting data:
-
-```ts
-await db.users.update(($) => ({
-  name: "Sasha",
-  updatedAt: $.serverDate(),
-}));
-```
-
-[See Helpers list](#helpers-list)
+The method allows updating a document. It's available on [`Collection`](/classes/collection/#update), [`Ref`](/classes/ref/#update), and [`Doc`](/classes/doc/#update).
 
 The method returns [`Ref`](/docs/classes/ref) instance:
 
 ```ts
-const userRef = await db.users.update({ name: "Sasha" });
-await userRef.update({ name: "Alexander" });
+const ref = await db.users.upset(userId, { name: "Alexander" });
+//=> Ref<User>
 ```
 
-## Write helpers
+Typesaurus accepts partial data. If the document doesn't exist, it will throw an error.
 
-### `$.serverDate`
+:::tip[Want to set if doesn't exists?]
+As `update` throws an error if the document doesn't exist, if you want to update or set if the document doesn't exist, you can use [`upset`](/docs/api/upset) method that does just that.
+:::
 
-- `$.serverDate` - set current server date to the field. [Read more about server dates](https://firebase.google.com/docs/firestore/manage-data/add-data#server_timestamp).
+It accepts a function as the argument that allows you to use [the `$` helper](#-helper) object:
 
-## Updating path
+```ts
+await db.users.update(userId, ($) => ({
+  name: "Sasha",
+  createdAt: $.serverDate(),
+}));
+```
 
-When updating nested fields, or
+## Deep field update
 
-> It's is crucial that the path can be safety updated without causing data incosistency
+TODO
 
 ## Builder mode
 
----
+TODO
 
-See other writing methods:
+## Variable model
 
-- [add](/docs/api/add)
-- [set](/docs/api/set)
-- [update](/docs/api/update)
-- [upset](/docs/api/upset)
-- [remove](/docs/api/remove)
+TODO
+
+## `$` helper
+
+The argument function receives the `$` helper object as the first argument that provides write helpers.
+
+`$` type is `TypesaurusUpdate.Helpers`.
+
+### `$.serverDate`
+
+To assign a server date to a field, use `$.serverDate`:
+
+```ts
+await db.users.update(userId, ($) => ({
+  name: "Sasha",
+  // Set createdAt to the server date
+  createdAt: $.serverDate(),
+}));
+```
+
+It will assign the date when Firestore saves the document.
+
+→ [Read more about server dates](/type-safety/server-dates/).
+
+### `$.remove`
+
+### `$.increment`
+
+### `$.arrayUnion`
+
+### `$.arrayRemove`
+
+### `$.field`
+
+#### `$.field(...).set`
+
+## Options
+
+### `as`
+
+You can tell Typesaurus that it's safe to set dates to server dates by passing the `as` option (`"server" | "client"`):
+
+```ts
+import { Typesaurus } from "typesaurus";
+
+interface User {
+  name: string;
+  createdAt: Typesaurus.ServerDate;
+}
+
+// Can't assign Date to ServerDate
+await db.users.set(userId, ($) => ({
+  name: "Sasha",
+  createdAt: new Date(),
+}));
+//=> The types of 'createdAt' are incompatible between these types.
+//=>    Type 'Date' is missing the following properties from type 'ValueServerDate': type, kind
+
+// OK!
+await db.users.set(
+  userId,
+  ($) => ({
+    name: "Sasha",
+    // OK! We're on server
+    createdAt: new Date(),
+  }),
+  { as: "server" },
+);
+```
+
+By default, Typesaurus uses the `"client"` option.
+
+→ [Read more about server dates](/type-safety/server-dates/).

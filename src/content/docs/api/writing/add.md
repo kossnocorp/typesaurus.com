@@ -2,6 +2,7 @@
 title: add
 sidebar:
   order: 1
+  badge: TODO
 ---
 
 The method allows one to add a document to a collection. It's available on [`Collection`](/docs/classes/collection).
@@ -28,9 +29,13 @@ await db.users.add(($) => ({
 }));
 ```
 
+## Variable model
+
+TODO
+
 ## `$` helper
 
-The argument function receives `$` helper object as the first argument that provides write helpers.
+The argument function receives the `$` helper object as the first argument that provides write helpers.
 
 `$` type is `TypesaurusCore.WriteHelpers<Model>`.
 
@@ -83,6 +88,6 @@ await db.users.add(
 );
 ```
 
-By default, Typesaurus uses `"client"` option.
+By default, Typesaurus uses the `"client"` option.
 
 → [Read more about server dates](/type-safety/server-dates/).
