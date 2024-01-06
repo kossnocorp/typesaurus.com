@@ -2,16 +2,24 @@
 title: add
 sidebar:
   order: 1
-  badge: TODO
 ---
 
-To add a document with random id to a collection, use `add` method on [`Collection`](/docs/classes/collection).
+The method allows one to add a document to a collection. It's available on [`Collection`](/docs/classes/collection).
+
+The method returns [`Ref`](/docs/classes/ref) instance:
 
 ```ts
-await db.users.add({ name: "Sasha" });
+const ref = await db.users.add({ name: "Sasha" });
+//=> Ref<User>
+
+// The method generates random id:
+ref.id;
+//=> "E0YNA7wUDA2Nc5WGjJdz" (Id<"users">)
 ```
 
-The method also accepts `($: TypesaurusCore.WriteHelpers<Model>) => TypesaurusCore.WriteData<Model, Props>` as the argument, the function that allows you to use helpers when setting data:
+Typesaurus expects you to pass complete data.
+
+It accepts a function as the argument that allows you to use [the `$` helper](#-helper) object:
 
 ```ts
 await db.users.add(($) => ({
@@ -20,23 +28,61 @@ await db.users.add(($) => ({
 }));
 ```
 
-The method returns [Ref](/docs/classes/ref) instance:
+## `$` helper
 
-```ts
-const userRef = await db.users.add({ name: "Sasha" });
-await userRef.update({ name: "Alexander" });
-```
+The argument function receives `$` helper object as the first argument that provides write helpers.
 
-## Write helpers
+`$` type is `TypesaurusCore.WriteHelpers<Model>`.
 
 ### `$.serverDate`
 
----
+To assign a server date to a field, use `$.serverDate`:
 
-See other writing methods:
+```ts
+await db.users.add(($) => ({
+  name: "Sasha",
+  // Set createdAt to the server date
+  createdAt: $.serverDate(),
+}));
+```
 
-- [add](/docs/api/add)
-- [set](/docs/api/set)
-- [update](/docs/api/update)
-- [upset](/docs/api/upset)
-- [remove](/docs/api/remove)
+It will assign the date when Firestore saves the document.
+
+→ [Read more about server dates](/type-safety/server-dates/).
+
+## Options
+
+### `as`
+
+You can tell Typesaurus that it's safe to set dates to server dates by passing the `as` option (`"server" | "client"`):
+
+```ts
+import { Typesaurus } from "typesaurus";
+
+interface User {
+  name: string;
+  createdAt: Typesaurus.ServerDate;
+}
+
+// Can't assign Date to ServerDate
+await db.users.add(($) => ({
+  name: "Sasha",
+  createdAt: new Date(),
+}));
+//=> The types of 'createdAt' are incompatible between these types.
+//=>    Type 'Date' is missing the following properties from type 'ValueServerDate': type, kind
+
+// OK!
+await db.users.add(
+  ($) => ({
+    name: "Sasha",
+    // OK! We're on server
+    createdAt: new Date(),
+  }),
+  { as: "server" },
+);
+```
+
+By default, Typesaurus uses `"client"` option.
+
+→ [Read more about server dates](/type-safety/server-dates/).

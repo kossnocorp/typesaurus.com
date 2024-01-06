@@ -69,7 +69,7 @@ setTimeout(off, 5000);
 
 ## Pagination
 
-To paginate data, use one of methods provided by [the `$` helper](#-helper):
+To paginate data, use one of the methods provided by [the `$` helper](#-helper):
 
 ```ts
 await db.users.query(($) => [
