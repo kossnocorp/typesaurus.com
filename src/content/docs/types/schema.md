@@ -100,6 +100,101 @@ function updateComment(
 }
 ```
 
+## `Data`
+
+The type represents the document data. It's what you get reading or creating a document via [collection's `doc`](/classes/collection/#doc).
+
+```ts
+interface Props {
+  post: Schema["posts"]["Data"];
+}
+
+function Post({ post }: Props) {
+  return <div>Post: {post.title}</div>;
+}
+```
+
+## `Result`
+
+The type represents the result of a reading operation, like [the `get` method](/api/reading/get). It can be the [`Doc`](/classes/doc) instance, `null` if the document is not found, or `undefined` if the operation is still in progress.
+
+```ts
+interface Props {
+  post: Schema["posts"]["Result"];
+}
+
+function Post({ post }: Props) {
+  if (post === null) return <div>Post not found</div>;
+  if (post === undefined) return <div>Loading...</div>;
+  return <div>Post: {post.title}</div>;
+}
+```
+
+## `AssignArg`
+
+The type represents the argument of an assign function. It can be used for all writing operations and expects the complete document data.
+
+It unions [`AssignData`](#assigndata) and [`AssignGetter`](#assigngetter) types.
+
+```ts
+function createPost(data: Schema["posts"]["AssignArg"]) {
+  return db.posts.add(data);
+}
+
+createPost(($) => ({
+  title: "Hello!",
+  publishedAt: $.serverDate(),
+}));
+
+createPost({ title: "Hello!" });
+```
+
+## `AssignData`
+
+The type represents the data of an assign function. It can be used for all writing operations and expects the complete document data.
+
+```ts
+function createPost(data: Schema["posts"]["AssignData"]) {
+  return db.posts.add(data);
+}
+
+createPost({ title: "Hello!" });
+```
+
+## `AssignGetter`
+
+The type represents the getter of an assign function. It can be used for all writing operations and expects the complete document data.
+
+```ts
+function createPost(data: Schema["posts"]["AssignGetter"]) {
+  return db.posts.add(data);
+}
+
+createPost(($) => ({
+  title: "Hello!",
+  publishedAt: $.serverDate(),
+}));
+```
+
+## `WriteHelpers`
+
+The type represents the write helpers of an assign function. It can be used for all writing operations.
+
+```ts
+type Data = (
+  $: Schema["posts"]["WriteHelpers"],
+) => Schema["posts"]["AssignData"];
+
+function createPost(data: Data) {
+  return db.posts.add(($) => data($));
+}
+
+createPost(($) => ({
+  title: "Hello!",
+  publishedAt: $.serverDate(),
+}));
+```
+
 ## Advanced
 
 The following types are used internally in Typesaurus. You probably don't need to use them directly, but they're there for advanced use cases.
