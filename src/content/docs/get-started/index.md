@@ -46,7 +46,7 @@ Use recommended TypeScript config to make the most of Typesaurus:
 To define the database schema, import [`schema`] from [`typesaurus`]:
 
 ```ts
-import { schema } from "typesaurus";
+import { schema, Typesaurus } from "typesaurus";
 
 // Generate the db object from given schem that you can use to access
 // Firestore, i.e.:

@@ -1,10 +1,11 @@
 ---
-title: Id
-description: Id type reference
+title: Typesaurus
 sidebar:
   order: 2
   badge: TODO
 ---
+
+## `Id`
 
 > #### You might want to use inferred type instead!
 >

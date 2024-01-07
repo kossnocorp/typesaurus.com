@@ -58,7 +58,7 @@ renderUser(userFromDB);
 //=> OK
 ```
 
-→ [Read more about `Nullify`](/types/nullify/)
+→ [Read more about `Nullify`](/types/typesaurus/#nullify)
 
 Or, when possible, add or use `null` instead of `undefined`:
 

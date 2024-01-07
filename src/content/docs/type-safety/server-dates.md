@@ -4,7 +4,7 @@ sidebar:
   order: 4
 ---
 
-Server date is a special type [`Typesaurus.ServerDate`](/types/server-date/) that denotes that the given field can only be assigned by the database itself.
+Server date is a special type [`Typesaurus.ServerDate`](/types/typesaurus/#serverdate) that denotes that the given field can only be assigned by the database itself.
 
 It extends the built-in behavior of [Firestore server timestamps](https://firebase.google.com/docs/firestore/manage-data/add-data#server_timestamp), resolves to `Date`, and adds type-safety.
 

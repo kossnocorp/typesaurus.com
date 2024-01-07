@@ -81,7 +81,7 @@ function publishReport(
 
 ## Shared ids
 
-If your collections share ids, i.e., you use the organization id to store subscription documents, you can define a custom id using [`Typesaurus.Id`](/types/id/):
+If your collections share ids, i.e., you use the organization id to store subscription documents, you can define a custom id using [`Typesaurus.Id`](/types/typesaurus/#id):
 
 ```ts
 import { schema, Typesaurus } from "typesaurus";
@@ -103,7 +103,7 @@ function removeOrganization(organizationId: Schema["organizations"]["Id"]) {
 }
 ```
 
-→ [Read more about the `Id` type](/types/id)
+→ [Read more about the `Id` type](/types/typesaurus/#id)
 
 → [When to use shared ids](/design/shared-and-static-ids#sharing-ids/)
 

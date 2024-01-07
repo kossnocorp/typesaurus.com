@@ -151,7 +151,7 @@ const db = schema(($) => ({
 }));
 ```
 
-The subcollection path will be `posts/{postId}/comments` and the id will be [`Id<"posts/comments">`](/types/id/).
+The subcollection path will be `posts/{postId}/comments` and the id will be [`Id<"posts/comments">`](/types/typesaurus/#id).
 
 You can access a subcollection calling the partent collection with an id:
 
@@ -190,4 +190,4 @@ It will allow you to access collection via the alias `subscription` while keepin
 await db.subscriptions.get(subscriptionId);
 ```
 
-The name also affects the collection id type, so for our example it will be [`Id<"billing">`](/types/id/).
+The name also affects the collection id type, so for our example it will be [`Id<"billing">`](/types/typesaurus/#id).
