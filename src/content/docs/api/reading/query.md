@@ -2,7 +2,6 @@
 title: query
 sidebar:
   order: 3
-  badge: TODO
 ---
 
 To query a collection, use the `query` method on [`Collection`](/classes/collection/#query):
@@ -120,7 +119,17 @@ When querying extensive collections with similar data, i.e., using `name` or `co
 
 ## Counting
 
-TODO
+You can count the documents in a collection by calling the [`count`](/api/reading/count/) method:
+
+```ts
+await db.users
+  .query(($) => $.field("name").eq("Alexander"))
+  // Call count method:
+  .count();
+//=> 42
+```
+
+The method returns `Promise<number>`.
 
 ## `$` helper
 
