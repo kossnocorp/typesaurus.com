@@ -1,7 +1,7 @@
 ---
 title: Collection
 sidebar:
-  badge: TODO
+  order: 1
 ---
 
 The `Collection` class represents a collection in the database. It provides methods to read and write documents, access subcollections, and construct [ids](#id), [refs](#ref), and [docs](#doc).
