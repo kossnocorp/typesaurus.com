@@ -73,6 +73,8 @@ function addComment(postId: Schema["posts"]["Id"], text: string) {
 }
 ```
 
+→ [See `Id` in `Typesaurus`](/types/typesaurus/#id).
+
 ## `Collection`
 
 The type represents [the collection `Collection` instance](/classes/collection).
