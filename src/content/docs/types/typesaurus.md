@@ -5,13 +5,34 @@ sidebar:
   badge: TODO
 ---
 
+The namespaces provides a number of types that help to work with Typesaurus.
+
+## `Schema`
+
+The type represents your database structure and provides type shortcuts for all kinds of data:
+
+```ts
+import { schema, Typesaurus } from "typesaurus";
+
+const db = schema(($) => ({
+  orders: $.collection<Order>(),
+  books: $.collection<Book>(),
+}));
+
+// Infer schema type:
+type Schema = Typesaurus.Schema<typeof db>;
+
+// Use in a function:
+function orderBook(bookId: Schema["books"]["Id"]) {
+  return db.orders.add({ bookId });
+}
+```
+
+→ [Read more about the `Schema` type](/types/schema/)
+
 ## `Id`
 
-> #### You might want to use inferred type instead!
->
-> Unless you use the type when defining the database, [consider using inferred id types](/docs/guides/type-safety#schema-types). It's a more idiomatic and less verbose way to define the ids.
-
-The `Id` type allows to define typed id string:
+The type allows to define typed id strings. It accepts the collection path as the first generic argument:
 
 ```ts
 import { schema, Typesaurus } from "typesaurus";
@@ -22,4 +43,8 @@ const db = schema(($) => ({
 }));
 ```
 
-[Learn more about typed ids](/docs/guides/type-safety#typed-ids).
+:::tip[Use `Schema` where possible]
+It's recommended to use [the inferred `Schema` type](/types/schema/#id) instead of `Id` type where possible. `Id` type is useful when you need to define a type for a collection that is not defined in the schema.
+:::
+
+→ [Learn more about typed ids](/type-safety/typed-ids/).
