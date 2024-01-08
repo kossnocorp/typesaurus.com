@@ -73,6 +73,21 @@ function addComment(postId: Schema["posts"]["Id"], text: string) {
 }
 ```
 
+## `Collection`
+
+The type represents [the collection `Collection` instance](/classes/collection).
+
+```ts
+function addComment(
+  comments: Schema["posts"]["sub"]["comments"],
+  text: string,
+) {
+  return comments.add({ text });
+}
+
+addComment(db.posts(postId).comments, "Hello!");
+```
+
 ## `Ref`
 
 The type represents [the document `Ref` instance](/classes/ref).
@@ -316,67 +331,67 @@ queryPosts(($) => $.field("published").eq(true));
 
 ## `ServerDoc`
 
-The type is a server version of [the `Doc` type](#doc) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `Doc` type](#doc) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerData`
 
-The type is a server version of [the `Data` type](#data) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `Data` type](#data) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerResult`
 
-The type is a server version of [the `Result` type](#result) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `Result` type](#result) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerAssignArg`
 
-The type is a server version of [the `AssignArg` type](#assignarg) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `AssignArg` type](#assignarg) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerAssignData`
 
-The type is a server version of [the `AssignData` type](#assigndata) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `AssignData` type](#assigndata) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerAssignGetter`
 
-The type is a server version of [the `AssignGetter` type](#assigngetter) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `AssignGetter` type](#assigngetter) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerUpdateBuilder`
 
-The type is a server version of [the `UpdateBuilder` type](#updatebuilder) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `UpdateBuilder` type](#updatebuilder) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerUpdateArg`
 
-The type is a server version of [the `UpdateArg` type](#updatearg) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `UpdateArg` type](#updatearg) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerUpdateData`
 
-The type is a server version of [the `UpdateData` type](#updatedata) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `UpdateData` type](#updatedata) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerUpdateGetter`
 
-The type is a server version of [the `UpdateGetter` type](#updategetter) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `UpdateGetter` type](#updategetter) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
 ## `ServerUpdateHelpers`
 
-The type is a server version of [the `UpdateHelpers` type](#updatehelpers) where server dates are always present, unlike the client version where they might be `null`
+The type is a server version of [the `UpdateHelpers` type](#updatehelpers) where server dates are always present, unlike the client version where they might be `null`.
 
 → [Read more about server dates](/type-safety/server-dates/)
 
