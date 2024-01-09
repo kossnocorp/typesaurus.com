@@ -1,0 +1,17 @@
+---
+interface Props {
+  prefix: string;
+}
+
+const { prefix } = Astro.props;
+---
+
+<div class="flex space-x-2 items-center">
+  <span>{prefix}</span>
+  <img
+    src="/sasha.jpeg"
+    alt="Sasha Koss's avatar"
+    class="w-7 h-7 rounded-full"
+  />
+  <span class="font-medium">Sasha Koss</span>
+</div>

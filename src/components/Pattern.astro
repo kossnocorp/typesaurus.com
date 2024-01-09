@@ -1,0 +1,48 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  mode?: "post" | "list";
+}
+
+import Author from "./Author.astro";
+import FormattedDate from "./FormattedDate.astro";
+const { title, mode, date } = Astro.props;
+
+const className = [
+  "font-bold text-monsoon-200 leading-tight text-center text-balance text-3xl",
+  mode === "post" ? "sm:text-[3rem]" : "sm:text-[2rem] md:text-[2.5rem]",
+];
+---
+
+<div
+  class:list={[
+    "bg-[url('/pattern.png')] bg-cover overflow-hidden",
+    mode === "post" ? "" : "sm:aspect-video rounded-xl",
+  ]}
+>
+  <div
+    class:list={[
+      "bg-gradient-to-b from-siren-800/40 to-diesel-950 bg-opacity-10 w-full h-full flex flex-col justify-end items-center px-2 py-4 sm:p-10",
+      mode === "post" ? "pt-20 sm:pt-[10rem]" : "pt-20 sm:pt-4",
+    ]}
+  >
+    <div class="space-y-3 flex flex-col items-center max-w-screen-lg">
+      {
+        mode === "post" ? (
+          <h1 class:list={className}>{title}</h1>
+        ) : (
+          <h3 class:list={className}>{title}</h3>
+        )
+      }
+
+      <div class="text-monsoon-300">
+        <Author prefix="Published by" />
+      </div>
+
+      <div class="text-monsoon-300">
+        <FormattedDate date={date} />
+      </div>
+    </div>
+  </div>
+</div>
