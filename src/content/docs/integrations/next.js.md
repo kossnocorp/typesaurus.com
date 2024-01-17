@@ -38,7 +38,7 @@ export { admin };
 You'll need to set `GOOGLE_APPLICATION_CREDENTIALS_JSON` environment variable to the Firebase Admin SDK credentials JSON. You can get it from the Firebase console. Follow instructions from official [Firebase Admin SDK docs](https://firebase.google.com/docs/admin/setup#initialize_the_sdk_in_non-google_environments).
 
 :::caution[Don't use .env!]
-Don't commit the credentials to the repo! If you're using Vercel, you can set the environment variable in the project settings. For local enviro
+Don't commit the credentials to the repo! If you're using Vercel, you can set the environment variable in the project settings. For the local environment, use `.env`.local`.
 :::
 
 Also note that because of Next.js hot-reloading, the file is executed multiple times. That's why we check if the SDK is already initialized.
@@ -64,7 +64,6 @@ export async function POST(request: NextRequest) {
 And here we render the posts in a React Server Component (`app/posts/page.tsx`):
 
 ```tsx
-import { NextRequest, NextResponse } from "next/server";
 // Always import the SDK initialization
 import "YOUR_LOCATION";
 // Import your db
