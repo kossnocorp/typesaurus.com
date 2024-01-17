@@ -1,17 +1,15 @@
 ---
-title: Features
+title: Key eatures
 sidebar:
   order: 1
   badge: TODO
 ---
 
-# Key features
-
 This document lists key Typesaurus features that make it the best way to use Firestore.
 
 There're two main feature groups - type-safety, which enables data consistency, and developer experience that elevates Firestore to another level and makes it safe and fun to use.
 
-Skip to [Philosophy & architecture](/docs/intro/architecture) to learn about underling principles behind these features.
+Skip to [the architecture doc](/about/architecture/) to learn about underling principles behind these features.
 
 ## General features
 

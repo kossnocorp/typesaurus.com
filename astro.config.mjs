@@ -109,12 +109,13 @@ export default defineConfig({
             },
           ],
         },
-        {
-          label: "About",
-          autogenerate: {
-            directory: "about",
-          },
-        },
+        // TODO: Do it one day
+        // {
+        //   label: "About",
+        //   autogenerate: {
+        //     directory: "about",
+        //   },
+        // },
       ],
       editLink: {
         baseUrl: "https://github.com/kossnocorp/typesaurus.com/edit/main/",
