@@ -116,6 +116,17 @@ export default defineConfig({
         //     directory: "about",
         //   },
         // },
+        {
+          label: "Architecture",
+          items: [
+            {
+              label: "Decisions",
+              autogenerate: {
+                directory: "decisions",
+              },
+            },
+          ],
+        },
       ],
       editLink: {
         baseUrl: "https://github.com/kossnocorp/typesaurus.com/edit/main/",

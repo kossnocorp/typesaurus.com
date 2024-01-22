@@ -78,12 +78,24 @@ interface User {
   email?: string | undefined;
 }
 
-function sendEmail(user: Typesaurus.Nullify<User>) {
+function sendEmail(user: User) {
   // ...
 }
 
-// Without Nullify it would show a type error:
-sendEmail(await db.users.get(userId));
+function sendEmailNullified(user: Typesaurus.Nullify<User>) {
+  // ...
+}
+
+// Without Nullify it would show a type error.
+const user = await db.users.get(userId);
+if (user) {
+  // Type error!
+  sendEmail(user.data);
+  //=> Type 'null' is not assignable to type 'string | undefined'
+
+  // Ok!
+  sendEmailNullified(user.data);
+}
 ```
 
 ## `NarrowDoc`
