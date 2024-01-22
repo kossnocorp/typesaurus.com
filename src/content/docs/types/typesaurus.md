@@ -4,7 +4,7 @@ sidebar:
   order: 2
 ---
 
-The namespaces provides a number of types that help to work with Typesaurus.
+The namespace provides a number of types that help to work with Typesaurus.
 
 ## `Schema`
 
