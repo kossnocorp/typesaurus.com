@@ -44,7 +44,7 @@ The exception can be prevented by setting the `ignoreUndefinedProperties` option
 
 Additionally, `undefined` in arrays are not stripped, but replaced with `null`, making the behavior inconsistent and unpredictable.
 
-Neither throwing exceptions nor stripping `undefined`` from objects and replacing them with `null` in arrays are compatible with the goals of this decision, making it a non-viable solution.
+Neither throwing exceptions nor stripping `undefined` from objects and replacing them with `null` in arrays are compatible with the goals of this decision, making it a non-viable solution.
 
 ### Preserving `undefined`
 
