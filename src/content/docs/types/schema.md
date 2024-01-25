@@ -397,6 +397,18 @@ The type is a server version of [the `UpdateHelpers` type](#updatehelpers) where
 
 → [Read more about server dates](/type-safety/server-dates/)
 
+## `TransactionReadDoc`
+
+The type represents transaction read document. What you return from the transaction read function.
+
+→ [Read more about transactions](/advanced/transactions/)
+
+## `TransactionWriteDoc`
+
+The type represents transaction write document. What you get in the transaction write function.
+
+→ [Read more about transactions](/advanced/transactions/)
+
 ## `Def`
 
 The type represents the document definition. It's in many methods as a generic parameter.
