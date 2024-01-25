@@ -334,6 +334,19 @@ The field helpers that can be used to define the range are:
 - [`$.endAt`](#endat) - end the range at a value
 - [`$.endBefore`](#endbefore) - end the range before a value
 
+### `$.or`
+
+To query documents that match any of the queries, use the `or` method:
+
+```ts
+await db.users.quer(($) => [
+  $.field("age").gte(21),
+  $.or($.field("name").eq("Sasha"), $.field("name").eq("Tati")),
+]);
+```
+
+All the rest queries are considered to be joined by the and operator.
+
 ### `$.limit`
 
 To limit the number of documents returned by the query, use the `limit` method:
