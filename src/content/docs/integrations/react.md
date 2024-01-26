@@ -143,6 +143,57 @@ user;
 //=> undefined | null | Doc<User>
 ```
 
+## `useLazyRead`
+
+The `useLazyRead` hook is similar to `useRead`, but it doesn't perform the request or subscribe to the updates automatically. Instead, it returns a function that you can call to trigger the request:
+
+```tsx
+import { useLazyRead } from "@typesaurus/react";
+
+interface UIProps {
+  userId: string | null;
+}
+
+function UI({ userId }: UIProps) {
+  // Create user hook, but don't perform the request yet
+  const useUser = useLazyRead(userId && db.users.get(userId));
+
+  if (!user) return <div>Loading...</div>;
+
+  return (
+    <UIContext.Provider value={{ useUser }}>
+      <Content />
+    </UIContext.Provider>
+  );
+}
+
+function Content() {
+  // Get the user hook from the context
+  const { useUser } = useContext(UIContext);
+
+  // Trigger the request
+  const [user] = useUser();
+  if (!user) return <div>Loading...</div>;
+  return <div>{user.data.name}</div>;
+}
+```
+
+Here's an example of how to create the context:
+
+```tsx
+import { dummyLazyReadHook, TypesaurusReact } from "@typesaurus/react";
+
+interface UIContextValue {
+  // Use TypesaurusReact.HookLazyUse
+  useUser: TypesaurusReact.HookLazyUse<Schema["users"]["Result"]>;
+}
+
+const UIContext = createContext<UIContextValue>({
+  // Use dummy hook that always returns loading state
+  useUser: dummyLazyReadHook,
+});
+```
+
 ## `resolved` helper
 
 To know if the document is resolved, you can use [the `resolved` helper](/helpers/resolved/):
