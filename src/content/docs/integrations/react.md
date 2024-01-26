@@ -194,6 +194,19 @@ const UIContext = createContext<UIContextValue>({
 });
 ```
 
+You can also delay the request by passing false to the `useLazyRead`:
+
+```tsx
+function Content({ error }: Props) {
+  const { useUser } = useContext(UIContext);
+  // Skip request to user while there's an error
+  const [user] = useUser(!error);
+
+  if (!user) return <div>Loading...</div>;
+  return <div>{user.data.name}</div>;
+}
+```
+
 ## `resolved` helper
 
 To know if the document is resolved, you can use [the `resolved` helper](/helpers/resolved/):
