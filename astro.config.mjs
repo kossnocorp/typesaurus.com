@@ -131,6 +131,9 @@ export default defineConfig({
       editLink: {
         baseUrl: "https://github.com/kossnocorp/typesaurus.com/edit/main/",
       },
+      components: {
+        ThemeSelect: "./src/overrides/ThemeSelect.astro",
+      },
     }),
     tailwind({
       applyBaseStyles: false,
