@@ -31,6 +31,65 @@ interface Books {
 
 What you return from the function, defines the database structure.
 
+## Options
+
+You can pass the options object as the second argument.
+
+### `app`
+
+You can specify the app name in the options to make the web, server, or both to use the particular Firebase app:
+
+```ts
+schema(
+  ($) => ({
+    // ...
+  }),
+  // Use app-name app at both client and server
+  { app: "app-name" },
+);
+
+schema(
+  ($) => ({
+    // ...
+  }),
+  {
+    // Use server-name app at server
+    server: { app: "server-name" },
+    // Use client-name app at client
+    client: { app: "client-name" },
+  },
+);
+```
+
+If not specified, it will use the default app name (`[DEFAULT]`) assigned when calling `initializeApp` without the name argument.
+
+:::tip[Pass app name instead of instance]
+You can't pass the Firebase app instance instead of the name because this will make the DB definition not universal, so you should use the name instead:
+
+```ts
+import { initializeApp } from "firebase/app";
+
+// Initialize Web SDK with client-name.
+initializeApp({}, "client-name");
+```
+
+See Firebase [Web](https://firebase.google.com/docs/reference/js/app#functionoptions_) and [Admin](https://firebase.google.com/docs/reference/node/firebase#optional-name:-string) SDK reference for more details.
+:::
+
+### `preferRest`
+
+You can make Admin SDK to [use REST requests instead of gRPC](https://firebase.google.com/docs/reference/admin/node/firebase-admin.firestore.firestoresettings#firestoresettingspreferrest) where possible by setting the `preferRest` option. It [improves the cold-start times](https://issuetracker.google.com/issues/158014637).
+
+```ts
+schema(
+  ($) => ({
+    // ...
+  }),
+  // Prefer REST over gRPC where possible:
+  { server: { preferRest: true } },
+);
+```
+
 ## `$` helper
 
 The argument function receives `$` helper object as the first argument that provides the `schema` API.
