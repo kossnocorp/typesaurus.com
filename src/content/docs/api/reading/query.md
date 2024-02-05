@@ -117,7 +117,7 @@ Use last user id, starting with `undefined`, to query the page, `$.limit` to spe
 When querying extensive collections with similar data, i.e., using `name` or `country,` ordering by that data might cause Firestore to skip pages. So unless you know why - use `$.docId()`.
 :::
 
-## Aggregate queries
+## Aggregation queries
 
 You can use queries to aggregate data in a collection. There are three methods available: `count`, `sum`, and `average`.
 
