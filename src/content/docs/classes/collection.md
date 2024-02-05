@@ -74,7 +74,7 @@ await db.users.many([userId1, userId2]);
 
 ## `count`
 
-The method allows to count documents in the collection:
+The method allows counting documents in the collection:
 
 ```ts
 await db.users.count();
@@ -82,6 +82,36 @@ await db.users.count();
 ```
 
 → [Read more about the `count` method](/api/reading/count/)
+
+## `sum`
+
+:::tip[Change log]
+The method first appeared in `v10.1.0` and requires at least `firebase-admin@^12.0.0` and `firebase@^10.5.0`
+:::
+
+The method enables summing the collection field values:
+
+```ts
+await db.users.sum("age");
+//=> 42069
+```
+
+→ [Read more about the `sum` method](/api/reading/sum/)
+
+## `average`
+
+:::tip[Change log]
+The method first appeared in `v10.1.0` and requires at least `firebase-admin@^12.0.0` and `firebase@^10.5.0`
+:::
+
+The method allows to calculate the average of collection field values:
+
+```ts
+await db.users.average("age");
+//=> 42
+```
+
+→ [Read more about the `sum` method](/api/reading/sum/)
 
 ## `add`
 

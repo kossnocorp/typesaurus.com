@@ -24,6 +24,8 @@ All collections groups have altered methods available:
 - [`all`](/api/reading/all/) - reads all documents in the group
 - [`query`](/api/reading/query/) - queries the group
 - [`count`](/api/reading/count/) - counts all documents in the group
+- [`sum`](/api/reading/sum/) - sums give document field values in the group
+- [`average`](/api/reading/average/) - calculates the average of given document field values in the group
 
 Unlike the regular `all` and `query`, reading collection group will return mixed document types.
 

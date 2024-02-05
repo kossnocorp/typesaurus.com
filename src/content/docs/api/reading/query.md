@@ -117,7 +117,11 @@ Use last user id, starting with `undefined`, to query the page, `$.limit` to spe
 When querying extensive collections with similar data, i.e., using `name` or `country,` ordering by that data might cause Firestore to skip pages. So unless you know why - use `$.docId()`.
 :::
 
-## Counting
+## Aggregate queries
+
+You can use queries to aggregate data in a collection. There are three methods available: `count`, `sum`, and `average`.
+
+### `count`
 
 You can count the documents in a collection by calling the [`count`](/api/reading/count/) method:
 
@@ -126,6 +130,42 @@ await db.users
   .query(($) => $.field("name").eq("Alexander"))
   // Call count method:
   .count();
+//=> 42
+```
+
+The method returns `Promise<number>`.
+
+### `sum`
+
+:::tip[Change log]
+The method first appeared in `v10.1.0` and requires at least `firebase-admin@^12.0.0` and `firebase@^10.5.0`
+:::
+
+You can sum the document fields in a collection by calling the [`sum`](/api/reading/sum/) method:
+
+```ts
+await db.users
+  .query(($) => $.field("name").eq("Alexander"))
+  // Call sum method:
+  .sum("age");
+//=> 123
+```
+
+The method returns `Promise<number>`.
+
+### `average`
+
+:::tip[Change log]
+The method first appeared in `v10.1.0` and requires at least `firebase-admin@^12.0.0` and `firebase@^10.5.0`
+:::
+
+You can calculate the average of the document fields in a collection by calling the [`average`](/api/reading/average/) method:
+
+```ts
+await db.users
+  .query(($) => $.field("name").eq("Alexander"))
+  // Call average method:
+  .average("age");
 //=> 42
 ```
 
