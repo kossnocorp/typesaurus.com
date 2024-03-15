@@ -142,11 +142,37 @@ await user?.rename("Sasha Koss");
 
 Then, the `$.collection` method will check the compatibility of the mixins and the collection's schema, thus providing the type safety.
 
-Without narrowing down the type, the data inconsistency won't be an issue.
+The data inconsistency won't be an issue without narrowing down the type.
 
 However, with this approach, the mixing-in happens at the schema level, pulling all the necessary functionality into the production bundle, even if it's not used. Furthermore, the server code might leak into the client code, opening a security hole.
 
 A solution to this problem could be separate schema definition and mixing-in by creating enriched versions of the database instance separately for the client and server. Three database versions will make code more complex and reduce reusability as the server and client code must be written independently, essentially defeating the purpose.
+
+### Stripping the type
+
+Before v10, Typesaurus entities used to be simple objects without any methods and, hence, a smaller type surface. Because of that, it was easier to ensure the compatibility of the shared functions:
+
+```ts
+function rename(
+  entity: Typesaurus.Doc<NameFields> | Typesaurus.Ref<NameFields>,
+  name: string,
+) {
+  const [firstName = "", lastName = ""] = name.split(" ");
+  return update(entity, { firstName, lastName });
+}
+```
+
+Without rewriting the whole library back to this architecture (and creating many other problems), a way to approach this would be to create a set of methods emulating this behavior:
+
+```ts
+rename(user.strip(), "Sasha");
+```
+
+With the `strip` method and set of functions like `update` that now accept the stripped entities, it would be possible to share the functionality across the entities without breaking the types.
+
+Data inconsistency would be impossible without the `add`, `set`, and `upset` methods.
+
+However, this approach would introduce an additional API style, increasing the API surface and adding complexity and friction by forcing developers to choose between the two styles.
 
 ## The solution
 
