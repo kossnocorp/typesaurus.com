@@ -56,7 +56,7 @@ interface Profile extends NameFields {
 }
 ```
 
-While it's possible to use generics to accept `NameFields` instead, because the entity types are very complex, it doesn't work well in practice.
+While it's possible to use generics to accept a shared shape instead (`NameFields` in our example), because the entity types are very complex it doesn't work well in practice.
 
 It will break either when passing entities to such a function:
 
@@ -116,11 +116,37 @@ function add(
 
 The goal is to allow extending the entities with shared functionality without code duplication and data inconsistencies.
 
-The solution must preserve the full type safety and be tree-shakable, so the unused functionality doesn't end up in the production bundle.
+The solution must preserve the full type safety and be tree-shakable so the unused functionality doesn't end up in the production bundle.
+
+Finally, the solution should be easy to use and understand.
 
 ## Considered options
 
-TODO
+### Mixing into `schema`
+
+The most straightforward way to add functionality to the entities would be to mix in the functionality while defining the collections:
+
+```ts
+const db = schema(($) => ({
+  users: $.collection<User>([NameMixin, EmailMixin]),
+  profiles: $.collection<Profile>([NameMixin, AvatarMixin]),
+}));
+```
+
+So when you get a document or a reference from the collection, it would have the mixed-in functionality:
+
+```ts
+const user = await db.users.get(userId);
+await user?.rename("Sasha Koss");
+```
+
+Then, the `$.collection` method will check the compatibility of the mixins and the collection's schema, thus providing the type safety.
+
+Without narrowing down the type, the data inconsistency won't be an issue.
+
+However, with this approach, the mixing-in happens at the schema level, pulling all the necessary functionality into the production bundle, even if it's not used. Furthermore, the server code might leak into the client code, opening a security hole.
+
+A solution to this problem could be separate schema definition and mixing-in by creating enriched versions of the database instance separately for the client and server. Three database versions will make code more complex and reduce reusability as the server and client code must be written independently, essentially defeating the purpose.
 
 ## The solution
 
