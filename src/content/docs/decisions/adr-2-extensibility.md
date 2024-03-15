@@ -176,4 +176,21 @@ However, this approach would introduce an additional API style, increasing the A
 
 ## The solution
 
-TODO
+Of all considered options, the most sounding solution is mixing into the schema. To address the downsides of this approach, the mixing can happen when the functionality is needed, making bundle bloating and reduced reusability non-issues:
+
+```ts
+const user = await db.users.get(userId);
+await user?.as(NameMixin).rename("Sasha Koss");
+```
+
+The `as` method here ensures the type safety while simultaneously addressing the bundle bloating issue by enabling tree-shaking.
+
+Returning a limited version of the entity from the `as` method will prevent data inconsistency:
+
+```ts
+user.as(NameMixin).set({ firstName, lastName });
+//=> Property 'set' does not exist on type...
+
+user.as(NameMixin).ref.collection.add({ firstName, lastName });
+//=> Property 'add' does not exist on type...
+```
