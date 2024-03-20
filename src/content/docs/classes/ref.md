@@ -87,6 +87,8 @@ await ref.remove();
 
 ## `as`
 
+**⚠️ Available starting with v10.3.0**
+
 The method resolves [`Typesaurus.SharedRef`](/types/typesaurus/#sharedref) if the model extends the given type. Otherwise, it resolves `unknown` preventing the usage of incompatible models:
 
 ```ts
