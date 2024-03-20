@@ -84,3 +84,17 @@ await ref.remove();
 ```
 
 → [Read more about the `remove` method](/api/writing/remove/)
+
+## `as`
+
+The method resolves [`Typesaurus.SharedRef`](/types/typesaurus/#sharedref) if the model extends the given type. Otherwise, it resolves `unknown` preventing the usage of incompatible models:
+
+```ts
+rename(ref.as<NameFields>());
+```
+
+It allows sharing functionality across the refs and docs in a type-safe way.
+
+→ [Read more about sharing functionality](/type-safety/sharing/)
+
+→ [Read more about the `as` method](/api/misc/as/)
