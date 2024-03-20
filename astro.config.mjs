@@ -22,6 +22,23 @@ export default defineConfig({
       social: {
         github: "https://github.com/kossnocorp/typesaurus",
       },
+      head: [
+        // Trying Plausible (trial ends April 16 2024)
+        {
+          tag: "script",
+          defer: true,
+          "data-domain": "typesaurus.com",
+          src: "https://plausible.io/js/script.js",
+        },
+        // Trying Simple Analytics (trial ends April 16 2024)
+        // NOTE: Also look for the noscript.gif in the source code
+        {
+          tag: "script",
+          async: true,
+          defer: true,
+          src: "https://scripts.simpleanalyticscdn.com/latest.js",
+        },
+      ],
       sidebar: [
         {
           label: "Guides",
