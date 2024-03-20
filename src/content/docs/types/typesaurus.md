@@ -111,6 +111,90 @@ function sendEmail(
 }
 ```
 
+## `SharedRef`
+
+The shared ref type. Unlike regular ref, the shared ref lacks methods which type-safety depends on knowing the full type of the model: `set`, `upset`, and `as`.
+
+The ref's `collection` is also limited.
+
+```ts
+export interface NameFields {
+  firstName: string;
+  lastName: string;
+}
+
+function rename(entity: Typesaurus.SharedRef<NameFields>, name: string) {
+  const [firstName = "", lastName = ""] = name.split(" ");
+  return entity.update({ firstName, lastName });
+}
+
+rename(userRef.as<NameFields>());
+```
+
+→ [Read more about sharing functionality](/type-safety/sharing/)
+
+→ [Read more about the `as` method](/api/misc/as/)
+
+## `SharedDoc`
+
+The shared doc type. Unlike regular doc, the shared doc lacks methods which type-safety depends on knowing the full type of the model: `set`, `upset`, and `as`.
+
+The doc's `ref` is also limited.
+
+```ts
+export interface NameFields {
+  firstName: string;
+  lastName: string;
+}
+
+function rename(entity: Typesaurus.SharedDoc<NameFields>, name: string) {
+  const [firstName = "", lastName = ""] = name.split(" ");
+  return entity.update({ firstName, lastName });
+}
+
+rename(userDoc.as<NameFields>());
+```
+
+→ [Read more about sharing functionality](/type-safety/sharing/)
+
+→ [Read more about the `as` method](/api/misc/as/)
+
+## `SharedEntity`
+
+The shared ref or doc type. Unlike regular entity type, the shared entity lacks methods which type-safety depends on knowing the full type of the model: `set`, `upset`, and `as`.
+
+```ts
+export interface NameFields {
+  firstName: string;
+  lastName: string;
+}
+
+function rename(entity: Typesaurus.SharedEntity<NameFields>, name: string) {
+  const [firstName = "", lastName = ""] = name.split(" ");
+  return entity.update({ firstName, lastName });
+}
+
+// Accepts both refs and docs:
+rename(userRef.as<NameFields>());
+rename(userDoc.as<NameFields>());
+```
+
+→ [Read more about sharing functionality](/type-safety/sharing/)
+
+→ [Read more about the `as` method](/api/misc/as/)
+
+## `SharedCollection`
+
+The shared collection type. Unlike regular collection, the shared collection lacks methods which type-safety depends on knowing the full type of the model: `add`, `set`, `upset`, and `update`.
+
+:::tip[You probably don't need it]
+You probably don't need to use `SharedCollection` type directly. It's used internally in [`SharedRef`](#sharedref), [`SharedDoc`](#shareddoc), and [`SharedEntity`](#sharedentity) types.
+:::
+
+→ [Read more about sharing functionality](/type-safety/sharing/)
+
+→ [Read more about the `as` method](/api/misc/as/)
+
 ## `Id`
 
 The type allows to define typed id strings. It accepts the collection path as the first generic argument:

@@ -81,6 +81,12 @@ export default defineConfig({
                     directory: "api/writing",
                   },
                 },
+                {
+                  label: "Misc",
+                  autogenerate: {
+                    directory: "api/misc",
+                  },
+                },
               ],
             },
             {

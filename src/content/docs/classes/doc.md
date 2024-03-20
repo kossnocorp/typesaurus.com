@@ -95,3 +95,21 @@ await doc.remove();
 ```
 
 → [Read more about the `remove` method](/api/writing/remove/)
+
+## `narrow`
+
+TODO
+
+## `as`
+
+The method resolves [`Typesaurus.SharedDoc`](/types/typesaurus/#shareddoc) if the model extends the given type. Otherwise, it resolves `unknown` preventing the usage of incompatible models:
+
+```ts
+rename(doc.as<NameFields>());
+```
+
+It allows sharing functionality across the refs and docs in a type-safe way.
+
+→ [Read more about sharing functionality](/type-safety/sharing/)
+
+→ [Read more about the `as` method](/api/misc/as/)
