@@ -98,7 +98,20 @@ await doc.remove();
 
 ## `narrow`
 
-TODO
+The method narrows the [variable model](/type-safety/variable/) doc type:
+
+```ts
+const ghAccount = account.narrow<GitHubAccount>(
+  (data) => data.type === "github" && data,
+);
+//=> Doc<GitHubAccount> | undefined
+```
+
+It checks the data structure on the runtime and asserts the type.
+
+→ [Read more about variable models](/type-safety/variable/)
+
+→ [Read more about the `narrow` method](/api/misc/narrow/)
 
 ## `as`
 

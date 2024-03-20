@@ -84,7 +84,7 @@ account.email;
 
 Setting and reading variable documents is pretty straightforward. However, it gets trickier when you want to update it.
 
-Variable collections prevent you from updating the document without ensuring it's of the right shape using the [`narrow`](/api/narrow), so you can't accidentally update the wrong type:
+Variable collections prevent you from updating the document without ensuring it's of the right shape using the [`narrow`](/api/misc/narrow), so you can't accidentally update the wrong type:
 
 ```ts
 const account = await db.accounts.get(accountId);
