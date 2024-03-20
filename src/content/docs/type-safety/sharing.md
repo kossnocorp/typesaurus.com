@@ -4,6 +4,8 @@ sidebar:
   order: 10
 ---
 
+**⚠️ Available starting with v10.3.0**
+
 Often, multiple documents have a shared shape, and it's convenient to share functionality across them. For example, you might want a function that renames a user or a profile. For that purpose, Typesaurus provides a set of types and methods that enable sharing of functionality across the refs and docs in a type-safe way.
 
 ```ts
