@@ -33,16 +33,6 @@ export default defineConfig({
             src: "https://plausible.io/js/script.js",
           },
         },
-        // Trying Simple Analytics (trial ends April 16 2024)
-        // NOTE: Also look for the noscript.gif in the source code
-        {
-          tag: "script",
-          attrs: {
-            async: true,
-            defer: true,
-            src: "https://scripts.simpleanalyticscdn.com/latest.js",
-          },
-        },
       ],
       sidebar: [
         {
