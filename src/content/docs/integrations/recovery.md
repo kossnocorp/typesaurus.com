@@ -6,9 +6,9 @@ sidebar:
 
 **⚠️ Available starting with v10.6.0**
 
-Firestore allows you to recover document versions from the past, which is called [Point-in-time recovery](https://firebase.google.com/docs/firestore/pitr). It's useful when you accidentally delete or modify a document and want to restore it to the previous state.
+Firestore allows you to recover document versions from the past. The feature is called [point-in-time recovery](https://firebase.google.com/docs/firestore/pitr). It's useful when you accidentally delete or modify a document and want to restore it to the previous state.
 
-Typesaurus provides an adapter that allows you to use this feature. To start using it, install `@typesaurus/recovery` package:
+Typesaurus provides an adapter that allows you to use this feature with your Typesaurus database without losing type-information. To start using it, install `@typesaurus/recovery` package:
 
 ```bash
 npm install --save @typesaurus/recovery
