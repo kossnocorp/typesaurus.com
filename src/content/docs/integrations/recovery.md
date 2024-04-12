@@ -24,7 +24,7 @@ The package exposes a single method — `recover`. It accepts `Date`, timestamp 
 import { recover } from "@typesaurus/recovery";
 import { subDays } from "date-fns";
 
-// Get the user doc from 1 day ago:
+// Recover the user doc from 1 day ago:
 await recover(subDays(new Date(), 1), db.users.get(userId));
 // => Doc<User> | null
 ```
@@ -32,7 +32,7 @@ await recover(subDays(new Date(), 1), db.users.get(userId));
 The `recover` function accepts all reading methods:
 
 ```ts
-// Get user with their comments and posts:
+// Recover user with their comments and posts:
 const [user, comments, posts] = await recover(yesterday, [
   db.users.get(userId),
   db.users(userId).comments.all(),
