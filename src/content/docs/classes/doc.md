@@ -123,7 +123,7 @@ The method resolves [`Typesaurus.SharedDoc`](/types/typesaurus/#shareddoc) if th
 rename(doc.as<NameFields>());
 ```
 
-It allows sharing functionality across the refs and docs in a type-safe way.
+It allows sharing functionality across the db entities in a type-safe way.
 
 → [Read more about sharing functionality](/type-safety/sharing/)
 

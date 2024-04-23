@@ -95,7 +95,7 @@ The method resolves [`Typesaurus.SharedRef`](/types/typesaurus/#sharedref) if th
 rename(ref.as<NameFields>());
 ```
 
-It allows sharing functionality across the refs and docs in a type-safe way.
+It allows sharing functionality across the db entities in a type-safe way.
 
 → [Read more about sharing functionality](/type-safety/sharing/)
 

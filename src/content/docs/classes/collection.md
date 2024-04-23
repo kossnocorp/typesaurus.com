@@ -239,3 +239,19 @@ db.comments.doc(db.comments.id("42"), {
 ```
 
 → [Read more about the `Doc` class](/classes/doc/)
+
+## `as`
+
+**⚠️ Available starting with v10.7.0**
+
+The method resolves [`Typesaurus.SharedCollection`](/types/typesaurus/#sharedcollection) if the model extends the given type. Otherwise, it resolves `unknown` preventing the usage of incompatible models:
+
+```ts
+rename(collection.as<NameFields>());
+```
+
+It allows sharing functionality across the db entities in a type-safe way.
+
+→ [Read more about sharing functionality](/type-safety/sharing/)
+
+→ [Read more about the `as` method](/api/misc/as/)

@@ -14,7 +14,7 @@ export interface NameFields {
   lastName: string;
 }
 
-function rename(entity: Typesaurus.Entity<NameFields>, name: string) {
+function rename(entity: Typesaurus.SharedEntity<NameFields>, name: string) {
   const [firstName = "", lastName = ""] = name.split(" ");
   return entity.update({ firstName, lastName });
 }
@@ -29,7 +29,7 @@ rename(post.as<NameFields>());
 // Argument of type 'unknown' is not assignable to parameter of type 'SharedEntity<NameFields>'.ts(2345)
 ```
 
-On the function side, we use [`Typesaurus.Entity`](/types/typesaurus/#sharedentity) type that unions [`Typesaurus.Ref`](/types/typesaurus/#sharedref) and [`Typesaurus.Doc`](/types/typesaurus/#shareddoc). These shared types narrow the data type to the given shape (i.e. `NameFields`) and limit the available methods to the ones that don't depend on the full type of the model. The `set`, `upset`, and `as` methods are stripped to prevent data inconsistencies.
+On the function side, we use [`Typesaurus.SharedEntity`](/types/typesaurus/#sharedentity) type that unions [`Typesaurus.SharedRef`](/types/typesaurus/#sharedref) and [`Typesaurus.SharedDoc`](/types/typesaurus/#shareddoc). These shared types narrow the data type to the given shape (i.e. `NameFields`) and limit the available methods to the ones that don't depend on the full type of the model. The `set`, `upset`, and `as` methods are stripped to prevent data inconsistencies.
 
 ---
 
@@ -40,5 +40,9 @@ On the function side, we use [`Typesaurus.Entity`](/types/typesaurus/#sharedenti
 → [Read more about the `Typesaurus.Ref` type](/types/typesaurus/#sharedref)
 
 → [Read more about the `Typesaurus.Doc` type](types/typesaurus/#shareddoc)
+
+→ [Read more about the `Typesaurus.Collection` type](types/typesaurus/#sharedcollection)
+
+→ [Read more about the `Typesaurus.Group` type](types/typesaurus/#sharedgroup)
 
 → [Read the architecture decision record (ADR-2)](/decisions/adr-2-sharing/)

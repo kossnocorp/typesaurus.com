@@ -187,9 +187,15 @@ rename(userDoc.as<NameFields>());
 
 The shared collection type. Unlike regular collection, the shared collection lacks methods which type-safety depends on knowing the full type of the model: `add`, `set`, `upset`, and `update`.
 
-:::tip[You probably don't need it]
-You probably don't need to use `SharedCollection` type directly. It's used internally in [`SharedRef`](#sharedref), [`SharedDoc`](#shareddoc), and [`SharedEntity`](#sharedentity) types.
-:::
+→ [Read more about sharing functionality](/type-safety/sharing/)
+
+→ [Read more about the `as` method](/api/misc/as/)
+
+## `SharedGroup`
+
+**⚠️ Available starting with v10.7.0**
+
+The shared collection group type. Unlike regular groups, the shared group lacks methods which type-safety depends on knowing the full type of the model: `add`, `set`, `upset`, and `update`.
 
 → [Read more about sharing functionality](/type-safety/sharing/)
 
@@ -218,6 +224,8 @@ It's recommended to use [the inferred `Schema` type](/types/schema/#id) instead 
 
 ## `Collection`
 
+**⚠️ Deprecated starting with v10.7.0 in favor [`SharedCollection`](#sharedcollection)**
+
 The type allows defining collection types:
 
 ```ts
@@ -244,6 +252,8 @@ type AccountCollection = Typesaurus.Collection<
 
 ## `Ref`
 
+**⚠️ Deprecated starting with v10.7.0 in favor [`SharedRef`](#sharedref)**
+
 The type allows defining references:
 
 ```ts
@@ -265,6 +275,8 @@ type AccountRef = Typesaurus.Ref<
 → [See `Ref` in `Schema`](/types/schema/#ref).
 
 ## `Doc`
+
+**⚠️ Deprecated starting with v10.7.0 in favor [`SharedDoc`](#shareddoc)**
 
 The type represents the document type:
 

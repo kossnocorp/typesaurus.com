@@ -6,7 +6,7 @@ sidebar:
 
 **⚠️ Available starting with v10.3.0**
 
-The method checks that the entity's method is compatible with the provided type and casts `this` to shared entity type. It's available on [`Ref`](/classes/ref/#as) and [`Doc`](/classes/doc/#as).
+The method checks that the entity's method is compatible with the provided type and casts `this` to shared entity type. It's available on [`Ref`](/classes/ref/#as), [`Doc`](/classes/doc/#as) [`Collection`](/classes/collection/#as), and [`Group`](/classes/group/#as).
 
 ```ts
 export interface NameFields {

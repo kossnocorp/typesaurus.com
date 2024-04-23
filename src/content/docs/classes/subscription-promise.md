@@ -1,7 +1,7 @@
 ---
 title: SubscriptionPromise
 sidebar:
-  order: 4
+  order: 5
 ---
 
 The `SubscriptionPromise` class is what is returned from all reading operations. It allows to both read documents once or subscribe to updates depending what you do with the instance.
